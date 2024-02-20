@@ -3,3 +3,5 @@ Software Engineering Management Coursework for creating an educational game
 # Teams
 
 ## Shriya
+## Gursaiv
+## Alex
