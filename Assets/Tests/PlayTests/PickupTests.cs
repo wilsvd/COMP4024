@@ -8,38 +8,62 @@ using UnityEditor;
 
 public class PickupTests
 {
+
+    // GameObject prefab = Library.GetPrefabFromAssets("FilePath")
     [SetUp]
     public void SetUp()
     {
         SceneManager.LoadScene("SampleScene");
     }
+
     [UnityTest]
-    public IEnumerator PickupGameObject()
+    public IEnumerator PickupNoItems()
     {
         Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        GameObject gameObject = new GameObject();
-        Pickup pickup = gameObject.AddComponent<Pickup>();
-        pickup.PickUp(gameObject, inventory);
-        Assert.AreEqual(1, GameObject.Find("Inventory").transform.childCount);
+        Assert.AreEqual("Fists", inventory.slots[0].name);
+        Assert.AreEqual("Fists", inventory.slots[1].name);
 
         yield return null;
     }
 
     [UnityTest]
-    public IEnumerator PickupGameObjects()
+    public IEnumerator PickupOneItem()
     {
         Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         GameObject gameObject1 = new GameObject();
         Pickup pickup1 = gameObject1.AddComponent<Pickup>();
+        gameObject1.name = "Item";
         pickup1.PickUp(gameObject1, inventory);
-        Assert.AreEqual(1, GameObject.Find("Inventory").transform.childCount);
 
-        GameObject gameObject2 = new GameObject();
-        Pickup pickup2 = gameObject2.AddComponent<Pickup>();
-        pickup2.PickUp(gameObject2, inventory);
-        Assert.AreEqual(2, GameObject.Find("Inventory").transform.childCount);
+        Assert.AreEqual("Item(Clone)", inventory.slots[0].name);
+        Assert.AreEqual("Fists", inventory.slots[1].name);
 
         yield return null;
     }
+
+    [UnityTest]
+    public IEnumerator PickupTwoItems()
+    {
+        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        
+        GameObject gameObject1 = new GameObject();
+        Pickup pickup1 = gameObject1.AddComponent<Pickup>();
+        gameObject1.name = "Item";
+        pickup1.PickUp(gameObject1, inventory);
+
+
+        GameObject gameObject2 = new GameObject();
+        Pickup pickup2 = gameObject2.AddComponent<Pickup>();
+        gameObject2.name = "Item1";
+        pickup2.PickUp(gameObject2, inventory);
+
+
+        Assert.AreEqual("Item(Clone)", inventory.slots[0].name);
+        Assert.AreEqual("Item1(Clone)", inventory.slots[1].name);
+
+
+        yield return null;
+    }
+
 
 }

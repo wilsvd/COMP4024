@@ -38,16 +38,13 @@ public class Pickup : MonoBehaviour
 
     internal void PickUp(GameObject item, Inventory inventory)
     {
-        Debug.Log("Inventory Slots Length: " + inventory.slots.Length);
         for (int i = 0; i < inventory.slots.Length; i++)
         {
-            Debug.Log("Contains Item: " + inventory.slots[i]);
-            if (inventory.slots[i] == null)
+            if (inventory.slots[i].name == "Fists")
             {
                 GameObject newItem = Instantiate(item, inventory.transform.position, Quaternion.identity, inventory.transform);
                 newItem.SetActive(false);
                 inventory.slots[i] = newItem;
-                
                 Destroy(item);
                 break;
             }

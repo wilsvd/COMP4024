@@ -7,40 +7,22 @@ public class Inventory : MonoBehaviour
     
     public GameObject[] slots;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        slots = new GameObject[2];
-    }
-
     // Update is called once per frame
     void Update()
     {
-        SwitchItems();
+        SwitchItems(Input.GetKeyDown("1"), Input.GetKeyDown("2"));
     }
 
-
-    private void SwitchItems()
+    private void SwitchItems(bool input1, bool input2)
     {
-        if (slots == null)
+        if (input1)
         {
-            return;
-        }
-
-        if (slots[0] != null && Input.GetKeyDown("1"))
-        {
-            if (slots[1] != null)
-            {
-                slots[1].SetActive(false);
-            }
+            slots[1].SetActive(false);
             slots[0].SetActive(true);
         }
-        else if (slots[1] != null && Input.GetKeyDown("2"))
+        else if (input2)
         {
-            if (slots[0] != null)
-            {
-                slots[0].SetActive(false);
-            }
+            slots[0].SetActive(false);
             slots[1].SetActive(true);
         }
     }
