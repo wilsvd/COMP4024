@@ -19,7 +19,6 @@ Contributors names and contact info
 * Shriya
 * Gursaiv
 * Alex
-* Sam
 
 ## Acknowledgments
 
