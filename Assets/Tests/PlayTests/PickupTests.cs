@@ -31,9 +31,9 @@ public class PickupTests
     {
         Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         GameObject gameObject1 = new GameObject();
-        Pickup pickup1 = gameObject1.AddComponent<Pickup>();
         gameObject1.name = "Item";
-        pickup1.PickUp(gameObject1, inventory);
+
+        inventory.AddItem(gameObject1);
 
         Assert.AreEqual("Item(Clone)", inventory.slots[0].name);
         Assert.AreEqual("Fists", inventory.slots[1].name);
@@ -45,18 +45,14 @@ public class PickupTests
     public IEnumerator PickupTwoItems()
     {
         Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        
         GameObject gameObject1 = new GameObject();
-        Pickup pickup1 = gameObject1.AddComponent<Pickup>();
         gameObject1.name = "Item";
-        pickup1.PickUp(gameObject1, inventory);
 
+        inventory.AddItem(gameObject1);
 
         GameObject gameObject2 = new GameObject();
-        Pickup pickup2 = gameObject2.AddComponent<Pickup>();
         gameObject2.name = "Item1";
-        pickup2.PickUp(gameObject2, inventory);
-
+        inventory.AddItem(gameObject2);
 
         Assert.AreEqual("Item(Clone)", inventory.slots[0].name);
         Assert.AreEqual("Item1(Clone)", inventory.slots[1].name);
