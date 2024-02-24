@@ -139,7 +139,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 109856453855854700}
-  - component: {fileID: 1335817602352298645}
   - component: {fileID: 67287484692363349}
   m_Layer: 0
   m_Name: Sword
@@ -164,18 +163,6 @@ Transform:
   - {fileID: 5494259552546071668}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1335817602352298645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5184052531531279435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37f5e9a0e11a20e4daf39b1b775ef432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &67287484692363349
 BoxCollider2D:
   m_ObjectHideFlags: 0
