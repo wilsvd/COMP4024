@@ -6,7 +6,7 @@ public class Pickup : MonoBehaviour
 {
     private bool pickUpAllowed;
     internal Inventory inventory;
-
+    private Animator anim;
     private void Start()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
@@ -44,6 +44,7 @@ public class Pickup : MonoBehaviour
             {
                 GameObject newItem = Instantiate(item, inventory.transform.position, Quaternion.identity, inventory.transform);
                 newItem.SetActive(false);
+                GameObject.Find("Player").GetComponent<SwordAttack>().anim = newItem.GetComponent<Animator>();
                 inventory.slots[i] = newItem;
                 Destroy(item);
                 break;
