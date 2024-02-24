@@ -139,7 +139,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5401652674964232868}
-  - component: {fileID: 7638792803572833099}
   - component: {fileID: 7955228751746288564}
   m_Layer: 0
   m_Name: Bow
@@ -164,18 +163,6 @@ Transform:
   - {fileID: 6966914032496730811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7638792803572833099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438954085605858561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37f5e9a0e11a20e4daf39b1b775ef432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &7955228751746288564
 BoxCollider2D:
   m_ObjectHideFlags: 0
