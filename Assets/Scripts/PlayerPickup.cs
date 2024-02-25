@@ -8,7 +8,6 @@ public class PlayerPickup : MonoBehaviour
     private void Start()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,14 +18,6 @@ public class PlayerPickup : MonoBehaviour
             // Collides with the hitbox of VFX game object
             // We need to pass in the parent of the VFX game object
             inventory.AddItem(collision.transform.parent.gameObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Item"))
-        {
-            Debug.Log("Exit item");
         }
     }
 

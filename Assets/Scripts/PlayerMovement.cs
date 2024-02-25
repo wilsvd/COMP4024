@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    internal SpriteRenderer sprite;
     internal Rigidbody2D rb;
     internal float moveSpeed = 7f;
     internal float jumpForce = 7f;
     internal float fallMultiplier = 4.5f;
+
+    private bool facingRight = true;
 
     // Start is called before the first frame update
     public void Start()
@@ -24,7 +27,17 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer(float inputX, float inputY, float deltaTime)
     {
+        Debug.Log(inputX);
         rb.velocity = new Vector2(inputX * moveSpeed, rb.velocity.y);
+        if (inputX > 0.5 && !facingRight)
+        {
+            Flip();
+        }
+        else if (inputX < -0.5 && facingRight)
+        {
+            Flip();
+        }
+        
         if (inputY > 0.1)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -35,5 +48,13 @@ public class PlayerMovement : MonoBehaviour
             // Applying a custom fall multiplier when falling
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * deltaTime;
         }
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
