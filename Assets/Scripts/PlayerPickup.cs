@@ -16,7 +16,9 @@ public class PlayerPickup : MonoBehaviour
         if (collision.CompareTag("Item"))
         {
             Debug.Log("Enter item");
-            inventory.AddItem(collision.gameObject);
+            // Collides with the hitbox of VFX game object
+            // We need to pass in the parent of the VFX game object
+            inventory.AddItem(collision.transform.parent.gameObject);
         }
     }
 
