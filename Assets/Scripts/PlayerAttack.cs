@@ -58,28 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void BowAttack()
     {
-        /*
-        * TODO: Implement a Bow projectile with animation
-        */
+        inventory.equippedItem.GetComponent<Bow>().Attack();
         timeUntilAttack = rangeSpeed;
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        /*if (other.CompareTag("Boss"))
-        {
-            // Handle damage based on equipped item (sword or bow)
-            if (false *//*Check if sword is equipped*//*)
-                {
-                    other.GetComponent<Boss>().TakeDamage(meleeDamage);
-                }
-                else if (false *//*Check if bow is equipped*//*)
-                    {
-                        other.GetComponent<Boss>().TakeDamage(rangedDamage);
-                    }
-
-            Debug.Log("Enemy hit");
-        }*/
     }
 }
