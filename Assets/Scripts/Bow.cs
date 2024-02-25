@@ -8,11 +8,11 @@ public class Bow : MonoBehaviour
     public Transform arrowSpawnPoint;
     public float arrowSpeed = 10;
 
-    public void Attack()
+    public void Attack(float dir)
     {
         GameObject newArrow = Instantiate(arrow, arrowSpawnPoint.position, arrowSpawnPoint.rotation);
-
-        newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * arrowSpeed;
+        Vector2 direction = dir >= 0 ? transform.right : -transform.right;
+        newArrow.GetComponent<Rigidbody2D>().velocity = direction * arrowSpeed;
     }
 
 }

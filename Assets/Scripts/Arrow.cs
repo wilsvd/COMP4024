@@ -16,6 +16,7 @@ public class Arrow : MonoBehaviour
         if (other.CompareTag("Boss"))
         {
             Destroy(gameObject);
+            /*TODO: Add damage logic to Boss*/
         }
         
     }

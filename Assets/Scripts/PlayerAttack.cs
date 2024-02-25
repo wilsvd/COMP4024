@@ -51,14 +51,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void SwordAttack()
     {
-        
-        inventory.equippedItem.GetComponent<Animator>().SetTrigger("SwordAttack");
+        inventory.equippedItem.transform.GetChild(0).GetComponent<Sword>().Attack();
         timeUntilAttack = meleeSpeed;
     }
 
     private void BowAttack()
     {
-        inventory.equippedItem.GetComponent<Bow>().Attack();
+        inventory.equippedItem.GetComponent<Bow>().Attack(transform.localScale.x);
         timeUntilAttack = rangeSpeed;
     }
 }
