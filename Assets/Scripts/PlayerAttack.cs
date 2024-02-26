@@ -44,7 +44,6 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            Debug.Log(Time.deltaTime);
             timeUntilAttack -= Time.deltaTime;
         }
     }
