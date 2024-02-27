@@ -1,23 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-
-    //set its health to 100
     int health = 200;
-    //take damage
-    // call take damage function
-    //
+    
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Console.WriteLine("Damage: " + health);
         // add check 
     }
-
-
-
 
     // Start is called before the first frame update
     void Start()
