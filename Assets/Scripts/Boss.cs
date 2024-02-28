@@ -6,7 +6,22 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     int health = 200;
-    
+    private Animator bossAnimator;
+    private BossWeapon sword;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        bossAnimator = GetComponent<Animator>();
+        sword = transform.Find("BossWeapon").transform.GetChild(0).GetComponent<BossWeapon>();
+    }
+
+    public void PerformAttack()
+    {
+        // Your attack logic here
+        sword.Attack();
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -14,15 +29,29 @@ public class Boss : MonoBehaviour
         // add check 
     }
 
-    // Start is called before the first frame update
-    void Start()
+
+    public bool isFlipped = false;
+
+    public void LookAtPlayer(Transform player)
     {
-       
+        Vector3 flipped = transform.localScale;
+        flipped.z *= -1f;
+
+        if (transform.position.x > player.position.x && isFlipped)
+        {
+            Flip(flipped);
+            isFlipped = false;
+        }
+        else if (transform.position.x < player.position.x && !isFlipped)
+        {
+            Flip(flipped);
+            isFlipped = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Flip(Vector3  flipped)
     {
-        
+        transform.localScale = flipped;
+        transform.Rotate(0f, 180f, 0f);
     }
 }
