@@ -20,6 +20,7 @@ public class heath_bar : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Healthbar.SetHealth(currentHealth);
 
         if (currentHealth <= 0) {
             /*TODO:
@@ -27,10 +28,6 @@ public class heath_bar : MonoBehaviour
              * Restart Game
              */
             return;
-        }
-        else
-        {
-            Healthbar.SetHealth(currentHealth);
         }
 
 
