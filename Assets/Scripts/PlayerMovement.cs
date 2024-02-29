@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer(float inputX, float inputY, float deltaTime)
     {
-        // Debug.Log(inputX);
         rb.velocity = new Vector2(inputX * moveSpeed, rb.velocity.y);
         if (inputX > 0.5 && !facingRight)
         {

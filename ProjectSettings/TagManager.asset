@@ -10,11 +10,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Boss
+  - BossWeapon
   - 
   - 
   - 
@@ -40,6 +40,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2963359485
+    locked: 0
+  - name: Midground
+    uniqueID: 1321394307
+    locked: 0
+  - name: Foreground
+    uniqueID: 1122071911
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
