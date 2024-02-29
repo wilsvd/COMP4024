@@ -1,10 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleScript : MonoBehaviour
 {
     private bool hasCollided = false;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D obstacleCollider;
+
+    private void Start()
+    {
+        // Get the SpriteRenderer component attached to the GameObject
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Get the Collider2D component attached to the GameObject
+        obstacleCollider = GetComponent<Collider2D>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -20,6 +29,14 @@ public class ObstacleScript : MonoBehaviour
             if (bottomCollisionDetected)
             {
                 Debug.Log("Player collided with Obstacle's bottom!");
+
+                // Disable the sprite renderer
+                spriteRenderer.enabled = false;
+
+                // Disable the collider
+                obstacleCollider.enabled = false;
+
+                // Set hasCollided to true to prevent further collisions
                 hasCollided = true;
             }
         }
