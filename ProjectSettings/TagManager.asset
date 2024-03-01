@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Boss
+  - Door
   layers:
   - Default
   - TransparentFX
