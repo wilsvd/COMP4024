@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isLevelLoading && collision.CompareTag("Door"))
+        if (!isLevelLoading && collision.CompareTag("Door") && GameManager.Instance.isLevelOver)
         {
             isLevelLoading = true;
             GameManager.Instance.LoadNextLevel();
