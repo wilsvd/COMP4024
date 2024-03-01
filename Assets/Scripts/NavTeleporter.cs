@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class NavTeleporter : MonoBehaviour
 {
     // Assign a unique identifier to each sign in the Inspector
-    public int levelIdentifier;
+    public GameManager.Level levelIdentifier;
     private bool isTouching = false;
 
     private void Update()

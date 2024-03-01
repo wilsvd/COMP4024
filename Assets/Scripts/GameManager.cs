@@ -1,33 +1,41 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    private const string NavLevel = "NAV LEVEL";
+    private const string LevelOne = "LEVEL ONE";
+    private const string LevelTwo = "LEVEL TWO";
+    private const string LevelThree = "LEVEL THREE";
+    private const string BossLevel = "BOSS LEVEL";
 
-    // 0 rep
-    public int currentLevel = 0;
-    public bool isBoss = false;
-
-    enum Level
+    private const float CountTime = 30f;
+    public enum Level
     {
         Nav,
         One,
         Two,
         Three,
+        Boss,
     }
-    // Define a static property to access the instance
+    public Level currentLevel = Level.Nav;
+
+    private static GameManager instance;
+    public bool isLevelOver = false;
+    public bool isBoss = false;
+    private float countdownTime = CountTime; // 60 seconds initially
+    public Text countdownText;
+
+
     public static GameManager Instance
     {
         get
         {
             if (instance == null)
             {
-                // If no instance exists, find one in the scene
                 instance = FindObjectOfType<GameManager>();
 
-                // If still no instance exists, create a new one
                 if (instance == null)
                 {
                     GameObject obj = new GameObject("GameManager");
@@ -49,88 +57,110 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
         }
     }
 
-    /* Loading from the navigation page
-     *
-     */
-    public void LoadLevel(int level)
+    private void OnDestroy()
     {
-        switch ((Level) level)
+        SceneManager.sceneLoaded -= OnSceneLoaded; // Unsubscribe from the sceneLoaded event when the GameManager is destroyed
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Find the countdownText in the loaded scene
+        countdownText = FindObjectOfType<Text>();
+    }
+
+    private void Update()
+    {
+        // Update the countdown timer if the game is running and not in boss or home scene
+        if (countdownText != null && countdownTime > 0 && !isBoss && currentLevel != (int)Level.Nav && !isLevelOver)
         {
+            UpdateTimer();
+            countdownTime -= Time.deltaTime;
+        }
+        else if (countdownTime <= 0 && !isLevelOver)
+        {
+            Debug.Log("Time's up!");
+            isLevelOver = true;
+        }
+
+        /*
+         * On the Boss Scene there isn't any timer so the level is over when the boss died.
+         * I'm adding an input to mock Boss Dying to see if player can go through the door
+         */
+        if (Input.GetKeyDown(KeyCode.B)) {
+            isLevelOver = true;
+        }
+    }
+
+    private void UpdateTimer()
+    {
+        int minutes = Mathf.FloorToInt(countdownTime / 60);
+        int seconds = Mathf.FloorToInt(countdownTime % 60);
+        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void LoadLevel(Level level)
+    {
+        countdownTime = CountTime;
+        isLevelOver = false;
+
+        switch (level)
+        {
+            case Level.Nav:
+                SceneManager.LoadScene(NavLevel);
+                currentLevel = level;
+                break;
             case Level.One:
-                SceneManager.LoadScene("LEVEL ONE");
-                currentLevel = 1;
+                SceneManager.LoadScene(LevelOne);
+                currentLevel = level;
                 break;
             case Level.Two:
-                SceneManager.LoadScene("LEVEL TWO");
-                currentLevel = 2;
+                SceneManager.LoadScene(LevelTwo);
+                currentLevel = level;
                 break;
             case Level.Three:
-                SceneManager.LoadScene("LEVEL THREE");
-                currentLevel = 3;
+                SceneManager.LoadScene(LevelThree);
+                currentLevel = level;
+                break;
+            case Level.Boss:
+                SceneManager.LoadScene(BossLevel);
                 break;
         }
     }
 
     public void LoadNextLevel()
     {
-
-        // Handle level transitions
-        switch ((Level) currentLevel)
+        switch (currentLevel)
         {
             case Level.One:
-                if (isBoss)
-                {
-                    SceneManager.LoadScene("LEVEL TWO");
-                    isBoss = false;
-                    currentLevel++;
-                }
-                else
-                {
-                    SceneManager.LoadScene("BOSS LEVEL");
-                    isBoss = true;
-                }
-                break;
-
             case Level.Two:
                 if (isBoss)
                 {
-                    SceneManager.LoadScene("LEVEL THREE");
+                    LoadLevel(currentLevel+1);
                     isBoss = false;
-                    currentLevel++;
                 }
                 else
                 {
-                    SceneManager.LoadScene("BOSS LEVEL");
+                    LoadLevel(Level.Boss);
                     isBoss = true;
                 }
                 break;
-
             case Level.Three:
                 if (isBoss)
                 {
-                    SceneManager.LoadScene("NAV LEVEL");
+                    LoadLevel(Level.Nav);
                     isBoss = false;
-                    currentLevel = (int)Level.Nav;
                 }
                 else
                 {
-                    SceneManager.LoadScene("BOSS LEVEL");
+                    LoadLevel(Level.Boss);
                     isBoss = true;
                 }
                 break;
-
-            default:
-                // Reset to the initial level if an unknown level is reached
-                currentLevel = (int)Level.Nav;
-                SceneManager.LoadScene("NAV LEVEL");
-                isBoss = false;
-                break;
         }
-         // Increment the level
-            
     }
-
 }
