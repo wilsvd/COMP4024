@@ -20,8 +20,8 @@ public class PickupTests
     public IEnumerator PickupNoItems()
     {
         Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        Assert.AreEqual("Fists", inventory.slots[0].name);
-        Assert.AreEqual("Fists", inventory.slots[1].name);
+        Assert.AreEqual("Fists", inventory.slots[0].item.name);
+        Assert.AreEqual("Fists", inventory.slots[1].item.name);
 
         yield return null;
     }
@@ -35,8 +35,8 @@ public class PickupTests
 
         inventory.AddItem(gameObject1);
 
-        Assert.AreEqual("Item(Clone)", inventory.slots[0].name);
-        Assert.AreEqual("Fists", inventory.slots[1].name);
+        Assert.AreEqual("Item(Clone)", inventory.slots[0].item.name);
+        Assert.AreEqual("Fists", inventory.slots[1].item.name);
 
         yield return null;
     }
@@ -54,8 +54,8 @@ public class PickupTests
         gameObject2.name = "Item1";
         inventory.AddItem(gameObject2);
 
-        Assert.AreEqual("Item(Clone)", inventory.slots[0].name);
-        Assert.AreEqual("Item1(Clone)", inventory.slots[1].name);
+        Assert.AreEqual("Item(Clone)", inventory.slots[0].item.name);
+        Assert.AreEqual("Item1(Clone)", inventory.slots[1].item.name);
 
 
         yield return null;

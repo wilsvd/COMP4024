@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    public int attackDamage = 20;
+    public int attackDamage = 30;
     private bool canAttack = true;
 
     public void Attack()

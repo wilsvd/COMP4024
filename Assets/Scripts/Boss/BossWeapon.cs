@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossWeapon : MonoBehaviour
 {
-    public int attackDamage = 20;
+    public int attackDamage = 40;
     private bool canAttack = true;
     public void Attack()
     {
@@ -15,7 +15,6 @@ public class BossWeapon : MonoBehaviour
     {
         if (collision.CompareTag("Player") && canAttack)
         {
-            Debug.Log("Player takes damage");
             collision.GetComponent<heath_bar>().TakeDamage(attackDamage);
             canAttack = false;
         }
