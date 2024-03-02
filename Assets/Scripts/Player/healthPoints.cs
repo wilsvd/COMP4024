@@ -27,11 +27,17 @@ public class heath_bar : MonoBehaviour
              * Kill Player
              * Restart Game
              */
-            GameManager.Instance.ResetLevel();
-            return;
+            Die();
+            
         }
+    }
 
-
+    public void Die()
+    {
+        /*
+         * TODO: Create some nice death affect
+         */
+        GameManager.Instance.ResetLevel();
     }
 
 }
