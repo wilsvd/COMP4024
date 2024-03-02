@@ -113,21 +113,26 @@ public class GameManager : MonoBehaviour
             case Level.Nav:
                 SceneManager.LoadScene(NavLevel);
                 currentLevel = level;
+                isBoss = false;
                 break;
             case Level.One:
                 SceneManager.LoadScene(LevelOne);
                 currentLevel = level;
+                isBoss = false;
                 break;
             case Level.Two:
                 SceneManager.LoadScene(LevelTwo);
                 currentLevel = level;
+                isBoss = false;
                 break;
             case Level.Three:
                 SceneManager.LoadScene(LevelThree);
                 currentLevel = level;
+                isBoss = false;
                 break;
             case Level.Boss:
                 SceneManager.LoadScene(BossLevel);
+                isBoss = true;
                 break;
         }
     }
@@ -141,26 +146,27 @@ public class GameManager : MonoBehaviour
                 if (isBoss)
                 {
                     LoadLevel(currentLevel+1);
-                    isBoss = false;
                 }
                 else
                 {
                     LoadLevel(Level.Boss);
-                    isBoss = true;
                 }
                 break;
             case Level.Three:
                 if (isBoss)
                 {
                     LoadLevel(Level.Nav);
-                    isBoss = false;
                 }
                 else
                 {
                     LoadLevel(Level.Boss);
-                    isBoss = true;
                 }
                 break;
         }
+    }
+
+    public void ResetLevel()
+    {
+        LoadLevel(currentLevel);
     }
 }
