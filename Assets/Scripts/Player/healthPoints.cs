@@ -27,6 +27,7 @@ public class heath_bar : MonoBehaviour
              * Kill Player
              * Restart Game
              */
+            GameManager.Instance.ResetLevel();
             return;
         }
 
