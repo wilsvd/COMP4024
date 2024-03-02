@@ -20,9 +20,21 @@ public class Boss_Healthbar : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
         Healthbar.SetHealth(currentHealth);
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
 
+    }
+
+    public void Die()
+    {
+        /* 
+         * TODO: Create some nice death affect
+         */
+        GameManager.Instance.isLevelOver = true;
+        Destroy(gameObject);
     }
 
 }
