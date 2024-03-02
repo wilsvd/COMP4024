@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
         public Weapon type;
     }
 
-    public Item[] slots;
+    public Item[] slots = new Item[2];
 
     private Dictionary<Weapon, int> weaponIndices = new Dictionary<Weapon, int>();
 
@@ -28,18 +28,21 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         InitializeInventory();
-        UpdateEquippedItem(slots[0].item, slots[0].type);
+        
     }
 
     private void InitializeInventory()
     {
-        slots = new Item[2];
         GameObject fists = transform.GetChild(0).gameObject;
 
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i] = new Item { item = fists, type = Weapon.Fists };
         }
+        UpdateEquippedItem(slots[0].item, slots[0].type);
+        hasSword = false;
+        hasBow = false;
+        weaponIndices.Clear();
     }
 
     // Update is called once per frame
@@ -129,6 +132,19 @@ public class Inventory : MonoBehaviour
             }
         }
         return Weapon.Fists;
+    }
+
+    public void ResetInventory()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].type != Weapon.Fists)
+            {
+                Destroy(slots[i].item);
+            }
+        }
+
+        InitializeInventory();
     }
 
 }

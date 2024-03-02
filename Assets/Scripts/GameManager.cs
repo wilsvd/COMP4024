@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     private static GameManager instance;
     public bool isLevelOver = false;
+    public bool isLevelLoading = false;
+
     public bool isBoss = false;
     private float countdownTime = CountTime; // 60 seconds initially
     public Text countdownText;
@@ -69,6 +71,13 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Player player = FindObjectOfType<Player>();
+        if (player != null) player.ResetPlayer(currentLevel);
+
+        countdownTime = CountTime;
+        isLevelOver = false;
+        isLevelLoading = false;
+
         // Find the countdownText in the loaded scene
         countdownText = FindObjectOfType<Text>();
     }
@@ -105,9 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(Level level)
     {
-        countdownTime = CountTime;
-        isLevelOver = false;
-
+        isLevelLoading = true;
         switch (level)
         {
             case Level.Nav:
@@ -135,6 +142,7 @@ public class GameManager : MonoBehaviour
                 isBoss = true;
                 break;
         }
+        
     }
 
     public void LoadNextLevel()
