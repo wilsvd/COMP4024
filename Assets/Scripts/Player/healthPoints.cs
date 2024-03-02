@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class heath_bar : MonoBehaviour
 {
-    public int MaxHealth = 100;
+    public int MaxHealth = 125;
     public int currentHealth;
 
     public sliderscript Healthbar;

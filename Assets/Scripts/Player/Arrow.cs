@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public int attackDamage = 20;
     public float life = 3;
+    public Bow bow;
 
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class Arrow : MonoBehaviour
         if (other.CompareTag("Boss"))
         {
             Destroy(gameObject);
-            other.GetComponent<Boss_Healthbar>().TakeDamage(attackDamage);
+            other.GetComponent<Boss_Healthbar>().TakeDamage(bow.attackDamage);
         }
         
     }

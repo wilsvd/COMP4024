@@ -22,25 +22,20 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (timeUntilAttack <= 0f)
-        {
-            
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                /*
-                 * TODO: Find a better method of checking item instead of hard coded name
-                 */
-                if (inventory.equippedItem.name == "Sword(Clone)")
-                {
-                    SwordAttack();
 
-                }
-                else if (inventory.equippedItem.name == "Bow(Clone)")
-                {
-                    BowAttack();
-                }
+        if (timeUntilAttack <= 0f && Input.GetKeyDown(KeyCode.Space))
+        {
+
+            if (inventory.equippedItem.type == Inventory.Weapon.Sword)
+            {
+                SwordAttack();
+
             }
+            else if (inventory.equippedItem.type == Inventory.Weapon.Bow)
+            {
+                BowAttack();
+            }
+
         }
         else
         {
@@ -50,13 +45,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void SwordAttack()
     {
-        inventory.equippedItem.transform.GetChild(0).GetComponent<Sword>().Attack();
+        inventory.equippedItem.item.transform.GetChild(0).GetComponent<Sword>().Attack();
         timeUntilAttack = meleeSpeed;
     }
 
     private void BowAttack()
     {
-        inventory.equippedItem.GetComponent<Bow>().Attack(transform.localScale.x);
+        inventory.equippedItem.item.GetComponent<Bow>().Attack(transform.localScale.x);
         timeUntilAttack = rangeSpeed;
     }
 }
