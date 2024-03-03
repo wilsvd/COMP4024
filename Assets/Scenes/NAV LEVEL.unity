@@ -1485,6 +1485,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 719903128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1809758037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809758038}
+  m_Layer: 0
+  m_Name: SpawnSpoint
+  m_TagString: Spawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1809758038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809758037}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.98, y: 1.03, z: 5.9662824}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1866499670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,7 +1672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744012895289040816, guid: 92ce2d8d5c6a766489b5b6052c410627, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.49
+      value: 7.18
       objectReference: {fileID: 0}
     - target: {fileID: 8744012895289040816, guid: 92ce2d8d5c6a766489b5b6052c410627, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1836,4 +1867,5 @@ SceneRoots:
   - {fileID: 130408521}
   - {fileID: 719903128}
   - {fileID: 792408700}
+  - {fileID: 1809758038}
   - {fileID: 1905328788}

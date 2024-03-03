@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private bool isLevelLoading = false;
     public float deathYThreshold = -20f; // Adjust this value based on your level design
+
+    public GameObject spawnPoint;
+
+    private void Start()
+    {
+        RepawnPlayer();
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,10 +24,24 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isLevelLoading && collision.CompareTag("Door") && GameManager.Instance.isLevelOver)
+        Debug.Log(GameManager.Instance.isLevelOver);
+        if (collision.CompareTag("Door") && GameManager.Instance.isLevelOver && !GameManager.Instance.isLevelLoading)
         {
-            isLevelLoading = true;
             GameManager.Instance.LoadNextLevel();
+        }
+    }
+
+    public void RepawnPlayer()
+    {
+        spawnPoint = GameObject.FindGameObjectWithTag("Spawn");
+        // Set the player's position to the spawn point position
+        if (spawnPoint != null)
+        {
+            transform.position = spawnPoint.transform.position;
+        }
+        else
+        {
+            Debug.LogWarning("Spawn point not specified for player respawn.");
         }
     }
 }
