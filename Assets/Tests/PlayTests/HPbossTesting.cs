@@ -27,7 +27,6 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator SetMaxHealth_SetsMaxHealthCorrectly()
     {
-        //GameObject gameObject = new();
         Slider_bossHP sliderScript = gameObject.AddComponent<Slider_bossHP>();
         sliderScript.slider = gameObject.AddComponent<Slider>();
 
@@ -43,8 +42,6 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator TakeDamage_ReducesCurrentHealth()
     {
-        //GameObject gameObject = new();
-
         Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
         Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
@@ -65,8 +62,6 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator InitialiseHealth_Start()
     {
-        //GameObject gameObject = new();
-
         Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
         Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
