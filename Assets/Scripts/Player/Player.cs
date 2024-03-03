@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     public void ResetPlayer(GameManager.Level level)
     {
         GetComponent<PlayerController>().RepawnPlayer();
-        GetComponent<heath_bar>().InitialiseHealth();
+        GetComponent<healthPoints>().InitialiseHealth();
         if (level != GameManager.Level.Boss) 
             transform.GetChild(0).GetComponent<Inventory>().ResetInventory();
     }
