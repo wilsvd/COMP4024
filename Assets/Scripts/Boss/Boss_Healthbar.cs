@@ -12,6 +12,11 @@ public class Boss_Healthbar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitialiseHealth();
+    }
+
+    public void InitialiseHealth()
+    {
         currentHealth = MaxHealth;
         Healthbar.SetMaxHealth(MaxHealth);
 
