@@ -45,19 +45,19 @@ public class HPbossTesting
     {
         //GameObject gameObject = new();
 
-        Boss_Healthbar playerScript = gameObject.AddComponent<Boss_Healthbar>();
+        Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
         Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
 
 
-        playerScript.Healthbar = healthBarScript;
+        bossScript.Healthbar = healthBarScript;
 
-        playerScript.MaxHealth = 500;
-        playerScript.currentHealth = 100;
+        bossScript.MaxHealth = 500;
+        bossScript.currentHealth = 100;
 
-        playerScript.TakeDamage(20); // Taking 20 damage
+        bossScript.TakeDamage(20); // Taking 20 damage
 
-        Assert.AreEqual(80, playerScript.currentHealth, "Current health not reduced correctly");
+        Assert.AreEqual(80, bossScript.currentHealth, "Current health not reduced correctly");
 
 
         yield return null;
@@ -67,16 +67,16 @@ public class HPbossTesting
     {
         //GameObject gameObject = new();
 
-        Boss_Healthbar playerScript = gameObject.AddComponent<Boss_Healthbar>();
+        Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
         Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
-        playerScript.Healthbar = healthBarScript;
+        bossScript.Healthbar = healthBarScript;
 
-        playerScript.InitialiseHealth();
+        bossScript.InitialiseHealth();
 
         // Assert that the initial health values are set correctly
-        Assert.AreEqual(500, playerScript.MaxHealth, "Max health not initialized correctly");
-        Assert.AreEqual(500, playerScript.currentHealth, "Current health not initialized correctly");
+        Assert.AreEqual(500, bossScript.MaxHealth, "Max health not initialized correctly");
+        Assert.AreEqual(500, bossScript.currentHealth, "Current health not initialized correctly");
 
         yield return null;
     }
