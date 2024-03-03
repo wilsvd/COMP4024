@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Player player = FindObjectOfType<Player>();
-        if (player != null) player.ResetPlayer(currentLevel);
+        if (player != null) player.ResetPlayer(isBoss);
 
         countdownTime = CountTime;
         isLevelOver = false;

@@ -21,12 +21,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ResetPlayer(GameManager.Level level)
+    public void ResetPlayer(bool isBoss)
     {
         GetComponent<PlayerController>().RepawnPlayer();
         GetComponent<healthPoints>().InitialiseHealth();
-        if (level != GameManager.Level.Boss) 
+        if (!isBoss)
+        {
             transform.GetChild(0).GetComponent<Inventory>().ResetInventory();
+        }
+            
     }
 
 }
