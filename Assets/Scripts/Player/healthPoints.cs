@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class heath_bar : MonoBehaviour
+public class healthPoints : MonoBehaviour
 {
     public int MaxHealth = 125;
     public int currentHealth;
@@ -12,9 +12,13 @@ public class heath_bar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitialiseHealth();
+    }
+
+    public void InitialiseHealth()
+    {
         currentHealth = MaxHealth;
         Healthbar.SetMaxHealth(MaxHealth);
-
     }
 
     public void TakeDamage(int damage)
@@ -22,13 +26,14 @@ public class heath_bar : MonoBehaviour
         currentHealth -= damage;
         Healthbar.SetHealth(currentHealth);
 
-        if (currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
             /*TODO:
              * Kill Player
              * Restart Game
              */
             Die();
-            
+
         }
     }
 
