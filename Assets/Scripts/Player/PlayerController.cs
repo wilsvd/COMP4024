@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(GameManager.Instance.isLevelOver);
         if (collision.CompareTag("Door") && GameManager.Instance.isLevelOver && !GameManager.Instance.isLevelLoading)
         {
             GameManager.Instance.LoadNextLevel();
