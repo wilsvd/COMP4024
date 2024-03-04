@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class ObstacleScript : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject swordPrefab; // Serialize the field for inspection in the Unity Editor
+    [SerializeField]
+    private GameObject bowPrefab;   // Serialize the field for a bow prefab
     private bool hasCollided = false;
     private SpriteRenderer spriteRenderer;
     private Collider2D obstacleCollider;
@@ -30,11 +34,14 @@ public class ObstacleScript : MonoBehaviour
             {
                 Debug.Log("Player collided with Obstacle's bottom!");
 
+                // Determine the item to spawn based on random chance
+                SpawnRandomItem();
+
                 // Disable the sprite renderer
-                spriteRenderer.enabled = false;
+                //spriteRenderer.enabled = false;
 
                 // Disable the collider
-                obstacleCollider.enabled = false;
+                //obstacleCollider.enabled = false;
 
                 // Set hasCollided to true to prevent further collisions
                 hasCollided = true;
@@ -48,6 +55,25 @@ public class ObstacleScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             hasCollided = false;
+        }
+    }
+
+    private void SpawnRandomItem()
+    {
+        // Generate a random value between 0 and 1
+        float randomValue = Random.value;
+
+        if (randomValue <= 0.2f) // 20% chance for a bow
+        {
+            Instantiate(bowPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity);
+        }
+        else if (randomValue <= 0.4f) // 20% chance for a sword
+        {
+            Instantiate(swordPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity);
+        }
+        else // 60% chance to print "hello"
+        {
+            Debug.Log("hello");
         }
     }
 }

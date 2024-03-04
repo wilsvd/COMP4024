@@ -3,7 +3,9 @@ guid: a435b318342e2214a8b6ce6d77ee0d4a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - swordPrefab: {fileID: 5184052531531279435, guid: d41c138705235414aa3fb2723dcb91bc, type: 3}
+  - bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
