@@ -2,9 +2,16 @@ using UnityEngine;
 
 public class ObstacleScript : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject swordPrefab; // Serialize the field for inspection in the Unity Editor
+    [SerializeField]
+    private GameObject bowPrefab;   // Serialize the field for a bow prefab
+    [SerializeField]
+    private Sprite blankSprite;      // Serialize the field for a blank sprite
     private bool hasCollided = false;
     private SpriteRenderer spriteRenderer;
     private Collider2D obstacleCollider;
+    private bool isEmpty = false;
 
     private void Start()
     {
@@ -30,14 +37,19 @@ public class ObstacleScript : MonoBehaviour
             {
                 Debug.Log("Player collided with Obstacle's bottom!");
 
-                // Disable the sprite renderer
-                spriteRenderer.enabled = false;
+                // Determine the item to spawn based on random chance
+                SpawnRandomItem();
+
+                // Set the sprite to a blank square with the same size as the original box
+                spriteRenderer.sprite = blankSprite;
+                spriteRenderer.size = GetComponent<SpriteRenderer>().size;
 
                 // Disable the collider
-                obstacleCollider.enabled = false;
+                //obstacleCollider.enabled = false;
 
                 // Set hasCollided to true to prevent further collisions
                 hasCollided = true;
+                isEmpty = true;
             }
         }
     }
@@ -49,5 +61,24 @@ public class ObstacleScript : MonoBehaviour
         {
             hasCollided = false;
         }
+    }
+
+    private void SpawnRandomItem()
+    {
+        // Generate a random value between 0 and 1
+        float randomValue = Random.value;
+        if(isEmpty == true)
+        {
+            return;
+        }
+        if (randomValue <= 0.5f) // 20% chance for a bow
+        {
+            Instantiate(bowPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity);
+        }
+        else if (randomValue <= 1f) // 20% chance for a sword
+        {
+            Instantiate(swordPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity);
+        }
+        // No need for an 'else' here since we don't want to do anything for the 60% chance to print "hello"
     }
 }
