@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour
 
     private List<QuestionData> questions;
 
+    public Text questionText;
+
+
+
     [System.Serializable]
     public class QuestionData
     {
@@ -80,7 +84,25 @@ public class GameManager : MonoBehaviour
             LoadQuestionsFromCSV();
             printQuestions();
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
+
+
+            DisplayQuestion(1);
+
         }
+    }
+
+    void DisplayQuestion(int questionIndex)
+    {
+        // Ensure the question index is within bounds
+        if (questionIndex < 0 || questionIndex >= questions.Count)
+        {
+            Debug.LogError("Invalid question index.");
+            return;
+        }
+        // Get the current question
+        QuestionData currentQuestion = questions[questionIndex];
+
+        Debug.Log(currentQuestion.question);
     }
 
 

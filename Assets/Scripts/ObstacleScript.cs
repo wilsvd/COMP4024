@@ -8,10 +8,15 @@ public class ObstacleScript : MonoBehaviour
     private GameObject bowPrefab;   // Serialize the field for a bow prefab
     [SerializeField]
     private Sprite blankSprite;      // Serialize the field for a blank sprite
+
     private bool hasCollided = false;
     private SpriteRenderer spriteRenderer;
     private Collider2D obstacleCollider;
     private bool isEmpty = false;
+
+    public Canvas popupCanvas;
+
+
 
     private void Start()
     {
@@ -20,6 +25,10 @@ public class ObstacleScript : MonoBehaviour
 
         // Get the Collider2D component attached to the GameObject
         obstacleCollider = GetComponent<Collider2D>();
+
+        popupCanvas.enabled = false;
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,6 +46,13 @@ public class ObstacleScript : MonoBehaviour
             {
                 Debug.Log("Player collided with Obstacle's bottom!");
 
+                if (!isEmpty)
+                {
+                    // Display the popup
+                    popupCanvas.enabled = true;
+                }
+
+
                 // Determine the item to spawn based on random chance
                 SpawnRandomItem();
 
@@ -44,8 +60,6 @@ public class ObstacleScript : MonoBehaviour
                 spriteRenderer.sprite = blankSprite;
                 spriteRenderer.size = GetComponent<SpriteRenderer>().size;
 
-                // Disable the collider
-                //obstacleCollider.enabled = false;
 
                 // Set hasCollided to true to prevent further collisions
                 hasCollided = true;
