@@ -1,4 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
+using System.IO;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.TextCore.Text;
 
 public class ObstacleScript : MonoBehaviour
 {
@@ -15,7 +21,22 @@ public class ObstacleScript : MonoBehaviour
     private bool isEmpty = false;
 
     public Canvas popupCanvas;
+    private GameManager gameManager;
 
+
+    public List<QuestionData> questions;
+
+    [System.Serializable]
+    public class QuestionData
+    {
+        public string question;
+        public string difficulty;
+        public string answer1;
+        public string answer2;
+        public string answer3;
+        public string answer4;
+        public string correctAnswer;
+    }
 
 
     private void Start()
@@ -27,6 +48,8 @@ public class ObstacleScript : MonoBehaviour
         obstacleCollider = GetComponent<Collider2D>();
 
         popupCanvas.enabled = false;
+        gameManager = FindObjectOfType<GameManager>();
+
 
 
     }
@@ -48,8 +71,9 @@ public class ObstacleScript : MonoBehaviour
 
                 if (!isEmpty)
                 {
-                    // Display the popup
-                    popupCanvas.enabled = true;
+
+                 // NEED TO SET THE TEXT IN HERE FOR questionText
+
                 }
 
 
@@ -66,6 +90,20 @@ public class ObstacleScript : MonoBehaviour
                 isEmpty = true;
             }
         }
+    }
+    void DisplayQuestion(int questionIndex)
+    {
+        // Ensure the question index is within bounds
+        if (questionIndex < 0 || questionIndex >= questions.Count)
+        {
+            Debug.LogError("Invalid question index.");
+            return;
+        }
+        // Get the current question
+        QuestionData currentQuestion = questions[questionIndex];
+
+        // Display question text
+        questionText.text = currentQuestion.question;
     }
 
     private void OnCollisionExit2D(Collision2D collision)

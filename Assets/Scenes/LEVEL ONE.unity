@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 54223496}
   m_Layer: 5
   m_Name: questionText
-  m_TagString: Untagged
+  m_TagString: questionText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1605,6 +1605,8 @@ MonoBehaviour:
   bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
   blankSprite: {fileID: 21300000, guid: 4b809b569d94e4b40b0721088353206b, type: 3}
   popupCanvas: {fileID: 248427725}
+  questionText: {fileID: 0}
+  questions: []
 --- !u!1 &780846208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1997,6 +1999,8 @@ MonoBehaviour:
   bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
   blankSprite: {fileID: 21300000, guid: 4b809b569d94e4b40b0721088353206b, type: 3}
   popupCanvas: {fileID: 248427725}
+  questionText: {fileID: 0}
+  questions: []
 --- !u!1 &946531991
 GameObject:
   m_ObjectHideFlags: 0
@@ -2628,6 +2632,8 @@ MonoBehaviour:
   bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
   blankSprite: {fileID: 21300000, guid: 4b809b569d94e4b40b0721088353206b, type: 3}
   popupCanvas: {fileID: 248427725}
+  questionText: {fileID: 0}
+  questions: []
 --- !u!1 &1193831625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,6 +3570,8 @@ MonoBehaviour:
   bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
   blankSprite: {fileID: 21300000, guid: 4b809b569d94e4b40b0721088353206b, type: 3}
   popupCanvas: {fileID: 248427725}
+  questionText: {fileID: 0}
+  questions: []
 --- !u!1 &1589057056
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,6 +4597,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 248427726}
   - {fileID: 1074780161}
   - {fileID: 496006628}
   - {fileID: 2147219533}
@@ -4600,4 +4609,3 @@ SceneRoots:
   - {fileID: 379949437}
   - {fileID: 364769743}
   - {fileID: 1254233975}
-  - {fileID: 248427726}

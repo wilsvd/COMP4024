@@ -33,10 +33,9 @@ public class GameManager : MonoBehaviour
 
     private const string QuestionsCSVPath = "Assets/Resources/questions.csv"; // Modify the path accordingly
 
-    private List<QuestionData> questions;
+    public List<QuestionData> questions;
 
-    public Text questionText;
-
+    public Canvas CanvasPopup;
 
 
     [System.Serializable]
@@ -82,31 +81,14 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             LoadQuestionsFromCSV();
-            printQuestions();
+            //printQuestions();
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
 
-
-            DisplayQuestion(1);
-
         }
     }
 
-    void DisplayQuestion(int questionIndex)
-    {
-        // Ensure the question index is within bounds
-        if (questionIndex < 0 || questionIndex >= questions.Count)
-        {
-            Debug.LogError("Invalid question index.");
-            return;
-        }
-        // Get the current question
-        QuestionData currentQuestion = questions[questionIndex];
 
-        Debug.Log(currentQuestion.question);
-    }
-
-
-    private void printQuestions()
+    public void printQuestions()
     {
         if (questions != null && questions.Count > 0)
         {
