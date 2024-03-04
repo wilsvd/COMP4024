@@ -1032,6 +1032,7 @@ GameObject:
   - component: {fileID: 533560651}
   - component: {fileID: 533560650}
   - component: {fileID: 533560649}
+  - component: {fileID: 533560652}
   m_Layer: 0
   m_Name: INTERACTION BOX (1)
   m_TagString: Untagged
@@ -1151,6 +1152,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 858969339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &533560652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533560648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a435b318342e2214a8b6ce6d77ee0d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &780846208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1344,7 @@ GameObject:
   - component: {fileID: 890545479}
   - component: {fileID: 890545478}
   - component: {fileID: 890545477}
+  - component: {fileID: 890545480}
   m_Layer: 0
   m_Name: INTERACTION BOX (2)
   m_TagString: Untagged
@@ -1450,6 +1464,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 858969339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &890545480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890545476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a435b318342e2214a8b6ce6d77ee0d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1041044460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,6 +1714,7 @@ GameObject:
   - component: {fileID: 1075820797}
   - component: {fileID: 1075820796}
   - component: {fileID: 1075820795}
+  - component: {fileID: 1075820798}
   m_Layer: 0
   m_Name: INTERACTION BOX
   m_TagString: Untagged
@@ -1807,6 +1834,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 858969339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1075820798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075820794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a435b318342e2214a8b6ce6d77ee0d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1254233975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2199,6 +2238,7 @@ GameObject:
   - component: {fileID: 1399858459}
   - component: {fileID: 1399858458}
   - component: {fileID: 1399858457}
+  - component: {fileID: 1399858460}
   m_Layer: 0
   m_Name: INTERACTION BOX (3)
   m_TagString: Untagged
@@ -2318,6 +2358,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 858969339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1399858460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399858456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a435b318342e2214a8b6ce6d77ee0d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1589057056
 GameObject:
   m_ObjectHideFlags: 0
