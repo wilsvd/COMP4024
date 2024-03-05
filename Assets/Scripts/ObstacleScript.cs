@@ -23,6 +23,44 @@ public class ObstacleScript : MonoBehaviour
     public Text questionText;
 
     public List<QuestionData> questions;
+    int randomQuestionIndex;
+    public Button answerButton1;
+    public Button answerButton2;
+    public Button answerButton3;
+    public Button answerButton4;
+
+    void DisplayAnswerOnButton(Button button, string answer)
+    {
+        // Set the text on the button
+        button.GetComponentInChildren<Text>().text = answer;
+
+        // Optionally, you can add click events to the buttons to handle user input
+        button.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplication
+        button.onClick.AddListener(() => HandleButtonClick(answer));
+    }
+
+    void HandleButtonClick(string selectedAnswer)
+    {
+        // Get the current question
+        QuestionData currentQuestion = questions[randomQuestionIndex]; // Assuming questions are always displayed randomly
+
+        // Check if the selected answer is correct
+        if (selectedAnswer == currentQuestion.correctAnswer)
+        {
+            Debug.Log("Correct answer chosen!");
+
+            // Close the popup
+            popupCanvas.enabled = false;
+
+            // Continue with the game or perform other actions
+            // Add your logic here...
+        }
+        else
+        {
+            Debug.Log("Incorrect answer chosen!");
+        }
+    }
+
 
     private void Start()
     {
@@ -45,17 +83,7 @@ public class ObstacleScript : MonoBehaviour
             {
                 // Find the Text component within the popupCanvas
                 popupCanvas.enabled = false;
-                questionText = popupCanvas.GetComponentInChildren<Text>();
-
-                if (questionText != null)
-                {
-                    // Display the question text
-                    questionText.text = "Sam";
-                }
-                else
-                {
-                    Debug.LogError("Text component not found within the popupCanvas.");
-                }
+                
             }
             else
             {
@@ -88,7 +116,7 @@ public class ObstacleScript : MonoBehaviour
                 if (!isEmpty)
                 {
 
-                    DisplayQuestion(1);
+                    DisplayQuestion();
                     popupCanvas.enabled = true;
                  // NEED TO SET THE TEXT IN HERE FOR questionText
 
@@ -108,19 +136,29 @@ public class ObstacleScript : MonoBehaviour
             }
         }
     }
-    void DisplayQuestion(int questionIndex)
+    void DisplayQuestion()
     {
-        // Ensure the question index is within bounds
-        if (questionIndex < 0 || questionIndex >= questions.Count)
+        // Check if there are any questions available
+        if (questions == null || questions.Count == 0)
         {
-            Debug.LogError("Invalid question index.");
+            Debug.LogError("No questions available.");
             return;
         }
-        // Get the current question
-        QuestionData currentQuestion = questions[questionIndex];
+
+        // Pick a random question index
+        randomQuestionIndex = Random.Range(0, questions.Count);
+
+        // Get the randomly selected question
+        QuestionData currentQuestion = questions[randomQuestionIndex];
 
         // Display question text
         questionText.text = currentQuestion.question;
+
+        // Display multiple-choice answers on buttons
+        DisplayAnswerOnButton(answerButton1, currentQuestion.answer1);
+        DisplayAnswerOnButton(answerButton2, currentQuestion.answer2);
+        DisplayAnswerOnButton(answerButton3, currentQuestion.answer3);
+        DisplayAnswerOnButton(answerButton4, currentQuestion.answer4);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
