@@ -5,7 +5,6 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
-
 public class ObstacleScript : MonoBehaviour
 {
     [SerializeField]
@@ -19,25 +18,11 @@ public class ObstacleScript : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Collider2D obstacleCollider;
     private bool isEmpty = false;
-
     public Canvas popupCanvas;
     private GameManager gameManager;
-
+    public Text questionText;
 
     public List<QuestionData> questions;
-
-    [System.Serializable]
-    public class QuestionData
-    {
-        public string question;
-        public string difficulty;
-        public string answer1;
-        public string answer2;
-        public string answer3;
-        public string answer4;
-        public string correctAnswer;
-    }
-
 
     private void Start()
     {
@@ -47,13 +32,44 @@ public class ObstacleScript : MonoBehaviour
         // Get the Collider2D component attached to the GameObject
         obstacleCollider = GetComponent<Collider2D>();
 
-        popupCanvas.enabled = false;
+
+        // Find the canvas GameObject by name
+        GameObject canvasObject = GameObject.Find("CanvasPopup");
+
+        if (canvasObject != null)
+        {
+            // Get the Canvas component from the GameObject
+            popupCanvas = canvasObject.GetComponent<Canvas>();
+
+            if (popupCanvas != null)
+            {
+                // Find the Text component within the popupCanvas
+                popupCanvas.enabled = false;
+                questionText = popupCanvas.GetComponentInChildren<Text>();
+
+                if (questionText != null)
+                {
+                    // Display the question text
+                    questionText.text = "Sam";
+                }
+                else
+                {
+                    Debug.LogError("Text component not found within the popupCanvas.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Canvas component not found on the GameObject named");
+            }
+        }
+        else
+        {
+            Debug.LogError("GameObject with the name not found.");
+        }
+        
         gameManager = FindObjectOfType<GameManager>();
-
-
-
+        questions = gameManager.questions;
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the colliding object is the "Player" and the collision hasn't been processed yet
@@ -72,6 +88,8 @@ public class ObstacleScript : MonoBehaviour
                 if (!isEmpty)
                 {
 
+                    DisplayQuestion(1);
+                    popupCanvas.enabled = true;
                  // NEED TO SET THE TEXT IN HERE FOR questionText
 
                 }
@@ -83,7 +101,6 @@ public class ObstacleScript : MonoBehaviour
                 // Set the sprite to a blank square with the same size as the original box
                 spriteRenderer.sprite = blankSprite;
                 spriteRenderer.size = GetComponent<SpriteRenderer>().size;
-
 
                 // Set hasCollided to true to prevent further collisions
                 hasCollided = true;
