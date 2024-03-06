@@ -75,5 +75,23 @@ public class HPbossTesting
 
         yield return null;
     }
+    [UnityTest]
+    public IEnumerator BossDie()
+    {
+        Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
+        Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
+        healthBarScript.slider = gameObject.AddComponent<Slider>();
+        bossScript.Healthbar = healthBarScript;
 
+        bossScript.MaxHealth = 500;
+        bossScript.currentHealth = 0;
+
+        // Trigger the boss die action
+        bossScript.Die();
+
+        // Assert that the boss's health is set to zero
+        Assert.AreEqual(0, bossScript.currentHealth, "Current health not set to zero when boss dies");
+
+        yield return null;
+    }
 }
