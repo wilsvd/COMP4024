@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     internal float moveSpeed = 7f;
     internal float jumpForce = 7f;
     internal float fallMultiplier = 4.5f;
-
+    public bool canMove = true;
     private bool facingRight = true;
 
     // Start is called before the first frame update
@@ -23,10 +23,16 @@ public class PlayerMovement : MonoBehaviour
         float inputY = Input.GetAxisRaw("Vertical");
 
         MovePlayer(inputX, inputY, Time.deltaTime);
+
     }
 
     public void MovePlayer(float inputX, float inputY, float deltaTime)
     {
+        if(canMove == false)
+        {
+            inputX = 0;
+            inputY = 0;
+        }
         rb.velocity = new Vector2(inputX * moveSpeed, rb.velocity.y);
         if (inputX > 0.5 && !facingRight)
         {

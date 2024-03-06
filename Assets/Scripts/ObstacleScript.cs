@@ -28,16 +28,18 @@ public class ObstacleScript : MonoBehaviour
     public Button answerButton2;
     public Button answerButton3;
     public Button answerButton4;
-
+    public PlayerMovement playerMovement;
     void DisplayAnswerOnButton(Button button, string answer)
     {
         // Set the text on the button
         Debug.Log("SETUP BUTTON LISTENER");
         button.GetComponentInChildren<Text>().text = answer;
-   
-        //button.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplication
-        //button.onClick.AddListener(() => HandleButtonClick(answer));
+
+        button.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplication
+        button.onClick.AddListener(() => HandleButtonClick(answer));
         Debug.Log(button.name);
+
+        Debug.Log(button.isActiveAndEnabled);
     }
 
     void HandleButtonClick(string selectedAnswer)
@@ -51,9 +53,8 @@ public class ObstacleScript : MonoBehaviour
         {
             Debug.Log("Correct answer chosen!");
 
-            // Close the popup
-            popupCanvas.enabled = false;
-
+            // Determine the item to spawn based on random chance
+            SpawnRandomItem();
             // Continue with the game or perform other actions
             // Add your logic here...
         }
@@ -61,6 +62,13 @@ public class ObstacleScript : MonoBehaviour
         {
             Debug.Log("Incorrect answer chosen!");
         }
+        // Set the sprite to a blank square with the same size as the original box
+        spriteRenderer.sprite = blankSprite;
+        spriteRenderer.size = GetComponent<SpriteRenderer>().size;
+        popupCanvas.enabled = false;
+        playerMovement.canMove = true;
+        isEmpty = true;
+
     }
 
 
@@ -72,7 +80,7 @@ public class ObstacleScript : MonoBehaviour
         // Get the Collider2D component attached to the GameObject
         obstacleCollider = GetComponent<Collider2D>();
 
-
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         // Find the canvas GameObject by name
         GameObject canvasObject = GameObject.Find("CanvasPopup");
 
@@ -85,7 +93,6 @@ public class ObstacleScript : MonoBehaviour
             {
                 // Find the Text component within the popupCanvas
                 popupCanvas.enabled = false;
-                
             }
             else
             {
@@ -117,24 +124,15 @@ public class ObstacleScript : MonoBehaviour
 
                 if (!isEmpty)
                 {
-
+                    playerMovement.canMove = false;
                     DisplayQuestion();
                     popupCanvas.enabled = true;
-                 // NEED TO SET THE TEXT IN HERE FOR questionText
+                    // NEED TO SET THE TEXT IN HERE FOR questionText
 
                 }
 
-
-                // Determine the item to spawn based on random chance
-                SpawnRandomItem();
-
-                // Set the sprite to a blank square with the same size as the original box
-                spriteRenderer.sprite = blankSprite;
-                spriteRenderer.size = GetComponent<SpriteRenderer>().size;
-
                 // Set hasCollided to true to prevent further collisions
                 hasCollided = true;
-                isEmpty = true;
             }
         }
     }

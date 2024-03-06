@@ -1094,13 +1094,13 @@ MonoBehaviour:
   swordPrefab: {fileID: 5184052531531279435, guid: d41c138705235414aa3fb2723dcb91bc, type: 3}
   bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
   blankSprite: {fileID: 21300000, guid: 4b809b569d94e4b40b0721088353206b, type: 3}
-  popupCanvas: {fileID: 0}
-  questionText: {fileID: 0}
+  popupCanvas: {fileID: 1975887290}
+  questionText: {fileID: 1170391009}
   questions: []
-  answerButton1: {fileID: 0}
-  answerButton2: {fileID: 0}
-  answerButton3: {fileID: 0}
-  answerButton4: {fileID: 0}
+  answerButton1: {fileID: 1170391008}
+  answerButton2: {fileID: 1170391007}
+  answerButton3: {fileID: 1170391006}
+  answerButton4: {fileID: 1170391005}
 --- !u!1 &568609808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,9 +1686,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2482951908391341500, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776250488986216942, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310990142919708458, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460994713756376126, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921360503467844038, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4010903070520677682, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
       propertyPath: m_Name
       value: CanvasPopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010903070520677682, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5348900371169730721, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
       propertyPath: m_Pivot.x
@@ -1769,6 +1793,30 @@ PrefabInstance:
     - target: {fileID: 5348900371169730721, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883958613583276608, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029122005257852887, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336764027262376363, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525352361951098598, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8954097668271144904, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9183019922494227666, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2211,6 +2259,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1576395001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1722423857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1722423860}
+  - component: {fileID: 1722423859}
+  - component: {fileID: 1722423858}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1722423858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722423857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1722423859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722423857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1722423860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722423857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1732177217
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,13 +2610,13 @@ MonoBehaviour:
   swordPrefab: {fileID: 5184052531531279435, guid: d41c138705235414aa3fb2723dcb91bc, type: 3}
   bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
   blankSprite: {fileID: 21300000, guid: 4b809b569d94e4b40b0721088353206b, type: 3}
-  popupCanvas: {fileID: 0}
-  questionText: {fileID: 0}
+  popupCanvas: {fileID: 1975887290}
+  questionText: {fileID: 1170391009}
   questions: []
-  answerButton1: {fileID: 0}
-  answerButton2: {fileID: 0}
-  answerButton3: {fileID: 0}
-  answerButton4: {fileID: 0}
+  answerButton1: {fileID: 1170391008}
+  answerButton2: {fileID: 1170391007}
+  answerButton3: {fileID: 1170391006}
+  answerButton4: {fileID: 1170391005}
 --- !u!1 &1946887669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2809,3 +2925,4 @@ SceneRoots:
   - {fileID: 266188430}
   - {fileID: 983571734}
   - {fileID: 2014149696}
+  - {fileID: 1722423860}
