@@ -158,7 +158,17 @@ public class GameManager : MonoBehaviour
         isLevelLoading = false;
 
         // Find the countdownText in the loaded scene
-        countdownText = FindObjectOfType<Text>();
+
+        GameObject timer;
+
+        if(timer = GameObject.FindGameObjectWithTag("Timer"))
+        {
+            countdownText = timer.transform.GetChild(0).GetComponent<Text>();
+
+        }
+
+        Debug.Log(countdownText);
+
     }
 
     private void Update()

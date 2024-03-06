@@ -32,16 +32,18 @@ public class ObstacleScript : MonoBehaviour
     void DisplayAnswerOnButton(Button button, string answer)
     {
         // Set the text on the button
+        Debug.Log("SETUP BUTTON LISTENER");
         button.GetComponentInChildren<Text>().text = answer;
-
-        // Optionally, you can add click events to the buttons to handle user input
-        button.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplication
-        button.onClick.AddListener(() => HandleButtonClick(answer));
+   
+        //button.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplication
+        //button.onClick.AddListener(() => HandleButtonClick(answer));
+        Debug.Log(button.name);
     }
 
     void HandleButtonClick(string selectedAnswer)
     {
         // Get the current question
+        Debug.Log("Clicked");
         QuestionData currentQuestion = questions[randomQuestionIndex]; // Assuming questions are always displayed randomly
 
         // Check if the selected answer is correct
