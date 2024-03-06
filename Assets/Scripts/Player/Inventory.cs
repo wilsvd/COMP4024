@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
         
     }
 
-    private void InitializeInventory()
+    internal void InitializeInventory()
     {
         GameObject fists = transform.GetChild(0).gameObject;
 
@@ -51,7 +51,7 @@ public class Inventory : MonoBehaviour
         SwitchItems(Input.GetKeyDown(KeyCode.Alpha1), Input.GetKeyDown(KeyCode.Alpha2));
     }
 
-    private void SwitchItems(bool input1, bool input2)
+    internal void SwitchItems(bool input1, bool input2)
     {
         if (input1 || input2)
         {
@@ -66,7 +66,6 @@ public class Inventory : MonoBehaviour
     {
         Weapon weapon = CheckItemType(item);
         int weaponIndex = HasWeapon(weapon);
-
         if (weaponIndex >= 0)
         {
             ImproveWeapon(weapon, weaponIndex);
@@ -93,18 +92,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void UpdateEquippedItem(GameObject item, Weapon type)
+    internal void UpdateEquippedItem(GameObject item, Weapon type)
     {
         equippedItem.item = item;
         equippedItem.type = type;
     }
 
-    private int HasWeapon(Weapon item)
+    internal int HasWeapon(Weapon item)
     {
+        if (item == Weapon.Fists) return -1;
         return weaponIndices.ContainsKey(item) ? weaponIndices[item] : -1;
     }
 
-    private void ImproveWeapon(Weapon weapon, int weaponIndex)
+    internal void ImproveWeapon(Weapon weapon, int weaponIndex)
     {
         if (weapon == Weapon.Sword && hasSword)
         {
@@ -116,7 +116,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private Weapon CheckItemType(GameObject item)
+    internal Weapon CheckItemType(GameObject item)
     {
         Transform parent = item.transform;
         if (parent.childCount > 0)
