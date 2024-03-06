@@ -10,9 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool facingRight = true;
 
-    private bool jump=false;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    public int jumpCount = 0;
 
     // Start is called before the first frame update
     public void Start()
@@ -40,21 +38,20 @@ public class PlayerMovement : MonoBehaviour
         {
             Flip();
         }
-        
-        if (inputY > 0.1 )
+
+        if (Input.GetButtonDown("Jump"))
         {
-            if(IsGrounded() || jump)
+            if (jumpCount < 2)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                jump = !jump;
+                jumpCount++;
             }
-            
         }
 
         if (inputY < -0.1)
         {
             // Applying a custom fall multiplier when falling
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1)* deltaTime;
         }
     }
 
@@ -66,8 +63,11 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    private bool IsGrounded()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        if (other.CompareTag("Ground"))
+        {
+            jumpCount = 0;
+        }
     }
 }
