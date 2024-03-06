@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Player player = FindObjectOfType<Player>();
+        PlayerManager player = FindObjectOfType<PlayerManager>();
         if (player != null) player.ResetPlayer(isBoss);
 
         countdownTime = CountTime;

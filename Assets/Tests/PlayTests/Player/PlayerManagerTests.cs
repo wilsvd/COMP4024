@@ -20,7 +20,7 @@ public class PlayerManagerTests
 
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Player playerManager = player.GetComponent<Player>();
+        PlayerManager playerManager = player.GetComponent<PlayerManager>();
         GameObject originalSpawn = GameObject.Find("SpawnPoint");
 
         playerManager.ResetPlayer(false);
@@ -28,11 +28,9 @@ public class PlayerManagerTests
         yield return null;
 
 
-        PlayerController playerController = player.GetComponent<PlayerController>();
         healthPoints health = player.GetComponent<healthPoints>();
         Inventory inventory = player.transform.GetChild(0).GetComponent<Inventory>();
         // Assert
-        Assert.NotNull(playerController);
         Assert.NotNull(health);
         Assert.NotNull(inventory);
 
