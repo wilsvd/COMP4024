@@ -34,7 +34,7 @@ public class PlayerMovementTests
     [UnityTest]
     public IEnumerator PlayerMovesRight()
     {
-        playerMovement.MovePlayer(1f, 0f, deltaTime);
+        playerMovement.MovePlayer(1f, 0f, false,deltaTime);
         Assert.AreEqual(new Vector2(playerMovement.moveSpeed, 0f), playerMovement.rb.velocity);
         yield return null;
     }
@@ -42,7 +42,7 @@ public class PlayerMovementTests
     [UnityTest]
     public IEnumerator PlayerMovesLeft()
     {
-        playerMovement.MovePlayer(-1f, 0f, deltaTime);
+        playerMovement.MovePlayer(-1f, 0f, false, deltaTime);
         Assert.AreEqual(new Vector2(-playerMovement.moveSpeed, 0f), playerMovement.rb.velocity);
         yield return null;
     }
@@ -50,7 +50,7 @@ public class PlayerMovementTests
     [UnityTest]
     public IEnumerator PlayerMovesUp()
     {
-        playerMovement.MovePlayer(0f, 1f, deltaTime);
+        playerMovement.MovePlayer(0f, 1f, true, deltaTime);
         Assert.AreEqual(new Vector2(0f, playerMovement.jumpForce), playerMovement.rb.velocity);
         yield return null;
     }
@@ -59,7 +59,7 @@ public class PlayerMovementTests
     public IEnumerator PlayerMovesDown()
     {
         Vector2 originalVelocity = playerMovement.rb.velocity;
-        playerMovement.MovePlayer(0f, -1f, deltaTime);
+        playerMovement.MovePlayer(0f, -1f, false, deltaTime);
         Vector2 expectedDown = originalVelocity + Vector2.up * Physics2D.gravity.y * (playerMovement.fallMultiplier - 1) * deltaTime;
         Assert.AreEqual(expectedDown, playerMovement.rb.velocity);
         yield return null;
