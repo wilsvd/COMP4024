@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private const string LevelTwo = "LEVEL TWO";
     private const string LevelThree = "LEVEL THREE";
     private const string BossLevel = "BOSS LEVEL";
+    private const string VictoryLevel = "VICTORY_SCENE";
 
     private const float CountTime = 30f;
     public enum Level
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
         Two,
         Three,
         Boss,
+        Victory
     }
     public Level currentLevel = Level.Nav;
 
@@ -96,9 +98,13 @@ public class GameManager : MonoBehaviour
             isLevelOver = true;
         }
 
+        if (currentLevel == Level.Victory && Input.GetKeyDown(KeyCode.Return))
+        {
+            LoadLevel(Level.Nav);
+        }
+
         /*
-         * On the Boss Scene there isn't any timer so the level is over when the boss died.
-         * I'm adding an input to mock Boss Dying to see if player can go through the door
+         * Nice little cheat code to be able to beat levels :)
          */
         if (Input.GetKeyDown(KeyCode.B)) {
             isLevelOver = true;
@@ -141,6 +147,11 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(BossLevel);
                 isBoss = true;
                 break;
+            case Level.Victory:
+                SceneManager.LoadScene(VictoryLevel);
+                isBoss = false;
+                currentLevel = Level.Victory;
+                break;
         }
         
     }
@@ -163,7 +174,7 @@ public class GameManager : MonoBehaviour
             case Level.Three:
                 if (isBoss)
                 {
-                    LoadLevel(Level.Nav);
+                    LoadLevel(Level.Victory);
                 }
                 else
                 {
