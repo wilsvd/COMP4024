@@ -1190,6 +1190,7 @@ MonoBehaviour:
   answerButton2: {fileID: 1963017321}
   answerButton3: {fileID: 946531993}
   answerButton4: {fileID: 494605686}
+  playerMovement: {fileID: 0}
 --- !u!1 &780846208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1371,6 @@ GameObject:
   - component: {fileID: 890545479}
   - component: {fileID: 890545478}
   - component: {fileID: 890545477}
-  - component: {fileID: 890545480}
   - component: {fileID: 890545481}
   m_Layer: 0
   m_Name: INTERACTION BOX (2)
@@ -1491,28 +1491,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 858969339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &890545480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890545476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a435b318342e2214a8b6ce6d77ee0d4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swordPrefab: {fileID: 5184052531531279435, guid: d41c138705235414aa3fb2723dcb91bc, type: 3}
-  bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
-  blankSprite: {fileID: 21300000, guid: 4b809b569d94e4b40b0721088353206b, type: 3}
-  popupCanvas: {fileID: 248427725}
-  questionText: {fileID: 0}
-  questions: []
-  answerButton1: {fileID: 0}
-  answerButton2: {fileID: 0}
-  answerButton3: {fileID: 0}
-  answerButton4: {fileID: 0}
 --- !u!114 &890545481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,6 +1513,7 @@ MonoBehaviour:
   answerButton2: {fileID: 1963017321}
   answerButton3: {fileID: 946531993}
   answerButton4: {fileID: 494605686}
+  playerMovement: {fileID: 0}
 --- !u!114 &946531993 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1230013071794706229, guid: 232c4a1ab4287c9479be388683e40b8c, type: 3}
@@ -1926,6 +1905,7 @@ MonoBehaviour:
   answerButton2: {fileID: 1963017321}
   answerButton3: {fileID: 946531993}
   answerButton4: {fileID: 494605686}
+  playerMovement: {fileID: 0}
 --- !u!1001 &1254233975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2329,7 +2309,6 @@ GameObject:
   - component: {fileID: 1399858459}
   - component: {fileID: 1399858458}
   - component: {fileID: 1399858457}
-  - component: {fileID: 1399858460}
   - component: {fileID: 1399858461}
   m_Layer: 0
   m_Name: INTERACTION BOX (3)
@@ -2450,28 +2429,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 858969339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1399858460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1399858456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a435b318342e2214a8b6ce6d77ee0d4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swordPrefab: {fileID: 5184052531531279435, guid: d41c138705235414aa3fb2723dcb91bc, type: 3}
-  bowPrefab: {fileID: 5438954085605858561, guid: 3ae377eb0816f1249995a255d907f88e, type: 3}
-  blankSprite: {fileID: 21300000, guid: 4b809b569d94e4b40b0721088353206b, type: 3}
-  popupCanvas: {fileID: 248427725}
-  questionText: {fileID: 0}
-  questions: []
-  answerButton1: {fileID: 0}
-  answerButton2: {fileID: 0}
-  answerButton3: {fileID: 0}
-  answerButton4: {fileID: 0}
 --- !u!114 &1399858461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2494,6 +2451,7 @@ MonoBehaviour:
   answerButton2: {fileID: 1963017321}
   answerButton3: {fileID: 946531993}
   answerButton4: {fileID: 494605686}
+  playerMovement: {fileID: 0}
 --- !u!1 &1589057056
 GameObject:
   m_ObjectHideFlags: 0
