@@ -8,6 +8,7 @@ TagManager:
   - Boss
   - Door
   - Spawn
+  - questionText
   - Ground
   layers:
   - Default

@@ -1,5 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
-
+using static GameManager;
+using System.IO;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.TextCore.Text;
 public class ObstacleScript : MonoBehaviour
 {
     [SerializeField]
@@ -8,10 +13,64 @@ public class ObstacleScript : MonoBehaviour
     private GameObject bowPrefab;   // Serialize the field for a bow prefab
     [SerializeField]
     private Sprite blankSprite;      // Serialize the field for a blank sprite
+
     private bool hasCollided = false;
     private SpriteRenderer spriteRenderer;
     private Collider2D obstacleCollider;
     private bool isEmpty = false;
+    public Canvas popupCanvas;
+    private GameManager gameManager;
+    public Text questionText;
+
+    public List<QuestionData> questions;
+    int randomQuestionIndex;
+    public Button answerButton1;
+    public Button answerButton2;
+    public Button answerButton3;
+    public Button answerButton4;
+    public PlayerMovement playerMovement;
+    void DisplayAnswerOnButton(Button button, string answer)
+    {
+        // Set the text on the button
+        Debug.Log("SETUP BUTTON LISTENER");
+        button.GetComponentInChildren<Text>().text = answer;
+
+        button.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplication
+        button.onClick.AddListener(() => HandleButtonClick(answer));
+        Debug.Log(button.name);
+
+        Debug.Log(button.isActiveAndEnabled);
+    }
+
+    void HandleButtonClick(string selectedAnswer)
+    {
+        // Get the current question
+        Debug.Log("Clicked");
+        QuestionData currentQuestion = questions[randomQuestionIndex]; // Assuming questions are always displayed randomly
+
+        // Check if the selected answer is correct
+        if (selectedAnswer == currentQuestion.correctAnswer)
+        {
+            Debug.Log("Correct answer chosen!");
+
+            // Determine the item to spawn based on random chance
+            SpawnRandomItem();
+            // Continue with the game or perform other actions
+            // Add your logic here...
+        }
+        else
+        {
+            Debug.Log("Incorrect answer chosen!");
+        }
+        // Set the sprite to a blank square with the same size as the original box
+        spriteRenderer.sprite = blankSprite;
+        spriteRenderer.size = GetComponent<SpriteRenderer>().size;
+        popupCanvas.enabled = false;
+        playerMovement.canMove = true;
+        isEmpty = true;
+
+    }
+
 
     private void Start()
     {
@@ -20,8 +79,34 @@ public class ObstacleScript : MonoBehaviour
 
         // Get the Collider2D component attached to the GameObject
         obstacleCollider = GetComponent<Collider2D>();
-    }
 
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        // Find the canvas GameObject by name
+        GameObject canvasObject = GameObject.Find("CanvasPopup");
+
+        if (canvasObject != null)
+        {
+            // Get the Canvas component from the GameObject
+            popupCanvas = canvasObject.GetComponent<Canvas>();
+
+            if (popupCanvas != null)
+            {
+                // Find the Text component within the popupCanvas
+                popupCanvas.enabled = false;
+            }
+            else
+            {
+                Debug.LogError("Canvas component not found on the GameObject named");
+            }
+        }
+        else
+        {
+            Debug.LogError("GameObject with the name not found.");
+        }
+        
+        gameManager = FindObjectOfType<GameManager>();
+        questions = gameManager.questions;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the colliding object is the "Player" and the collision hasn't been processed yet
@@ -37,21 +122,43 @@ public class ObstacleScript : MonoBehaviour
             {
                 Debug.Log("Player collided with Obstacle's bottom!");
 
-                // Determine the item to spawn based on random chance
-                SpawnRandomItem();
+                if (!isEmpty)
+                {
+                    playerMovement.canMove = false;
+                    DisplayQuestion();
+                    popupCanvas.enabled = true;
+                    // NEED TO SET THE TEXT IN HERE FOR questionText
 
-                // Set the sprite to a blank square with the same size as the original box
-                spriteRenderer.sprite = blankSprite;
-                spriteRenderer.size = GetComponent<SpriteRenderer>().size;
-
-                // Disable the collider
-                //obstacleCollider.enabled = false;
+                }
 
                 // Set hasCollided to true to prevent further collisions
                 hasCollided = true;
-                isEmpty = true;
             }
         }
+    }
+    void DisplayQuestion()
+    {
+        // Check if there are any questions available
+        if (questions == null || questions.Count == 0)
+        {
+            Debug.LogError("No questions available.");
+            return;
+        }
+
+        // Pick a random question index
+        randomQuestionIndex = Random.Range(0, questions.Count);
+
+        // Get the randomly selected question
+        QuestionData currentQuestion = questions[randomQuestionIndex];
+
+        // Display question text
+        questionText.text = currentQuestion.question;
+
+        // Display multiple-choice answers on buttons
+        DisplayAnswerOnButton(answerButton1, currentQuestion.answer1);
+        DisplayAnswerOnButton(answerButton2, currentQuestion.answer2);
+        DisplayAnswerOnButton(answerButton3, currentQuestion.answer3);
+        DisplayAnswerOnButton(answerButton4, currentQuestion.answer4);
     }
 
     private void OnCollisionExit2D(Collision2D collision)

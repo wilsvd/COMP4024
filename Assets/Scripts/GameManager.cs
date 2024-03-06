@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,6 +33,24 @@ public class GameManager : MonoBehaviour
     internal float countdownTime = CountTime; // 60 seconds initially
     public Text countdownText;
 
+    private const string QuestionsCSVPath = "Assets/Resources/questions.csv"; // Modify the path accordingly
+
+    public List<QuestionData> questions;
+
+    public Canvas CanvasPopup;
+
+
+    [System.Serializable]
+    public class QuestionData
+    {
+        public string question;
+        public string difficulty;
+        public string answer1;
+        public string answer2;
+        public string answer3;
+        public string answer4;
+        public string correctAnswer;
+    }
 
     public static GameManager Instance
     {
@@ -62,9 +82,68 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
+            LoadQuestionsFromCSV();
+            //printQuestions();
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
+
         }
     }
+
+
+    public void printQuestions()
+    {
+        if (questions != null && questions.Count > 0)
+        {
+            foreach (var question in questions)
+            {
+                Debug.Log($"Question: {question.question} \n" +
+                    $"Difficulty: {question.difficulty}" +
+                    $"Answers:" +
+                    $"1: {question.answer1}" +
+                    $"2: {question.answer2}" +
+                    $"3: {question.answer3}" +
+                    $"4: {question.answer4}" +
+                    $"Correct Answer: {question.correctAnswer}" +
+                    $"------------------------");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to load questions.");
+        }
+    }
+    private void LoadQuestionsFromCSV()
+    {
+        questions = new List<QuestionData>();
+
+        try
+        {
+            using (StreamReader reader = new StreamReader(QuestionsCSVPath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    string[] fields = line.Split(',');
+
+                    QuestionData questionData = new QuestionData();
+                    questionData.question = fields[0];
+                    questionData.difficulty = fields[1];
+                    questionData.answer1 = fields[2];
+                    questionData.answer2 = fields[3];
+                    questionData.answer3 = fields[4];
+                    questionData.answer4 = fields[5];
+                    questionData.correctAnswer = fields[6];
+
+                    questions.Add(questionData);
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error reading questions CSV: " + e.Message);
+        }
+    }
+
 
     private void OnDestroy()
     {
@@ -81,7 +160,17 @@ public class GameManager : MonoBehaviour
         isLevelLoading = false;
 
         // Find the countdownText in the loaded scene
-        countdownText = FindObjectOfType<Text>();
+
+        GameObject timer;
+
+        if(timer = GameObject.FindGameObjectWithTag("Timer"))
+        {
+            countdownText = timer.transform.GetChild(0).GetComponent<Text>();
+
+        }
+
+        Debug.Log(countdownText);
+
     }
 
     private void Update()
