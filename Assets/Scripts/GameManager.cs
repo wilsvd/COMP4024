@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private const string NavLevel = "NAV LEVEL";
-    private const string LevelOne = "LEVEL ONE";
-    private const string LevelTwo = "LEVEL TWO";
-    private const string LevelThree = "LEVEL THREE";
-    private const string BossLevel = "BOSS LEVEL";
+    internal const string NavLevel = "NAV LEVEL";
+    internal const string LevelOne = "LEVEL ONE";
+    internal const string LevelTwo = "LEVEL TWO";
+    internal const string LevelThree = "LEVEL THREE";
+    internal const string BossLevel = "BOSS LEVEL";
+    internal const string VictoryLevel = "VICTORY_SCENE";
 
-    private const float CountTime = 30f;
+    internal const float CountTime = 30f;
     public enum Level
     {
         Nav,
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
         Two,
         Three,
         Boss,
+        Victory
     }
     public Level currentLevel = Level.Nav;
 
@@ -28,7 +30,7 @@ public class GameManager : MonoBehaviour
     public bool isLevelLoading = false;
 
     public bool isBoss = false;
-    private float countdownTime = CountTime; // 60 seconds initially
+    internal float countdownTime = CountTime; // 60 seconds initially
     public Text countdownText;
 
     private const string QuestionsCSVPath = "Assets/Resources/questions.csv"; // Modify the path accordingly
@@ -177,7 +179,7 @@ public class GameManager : MonoBehaviour
         if (countdownText != null && countdownTime > 0 && !isBoss && currentLevel != (int)Level.Nav && !isLevelOver)
         {
             UpdateTimer();
-            countdownTime -= Time.deltaTime;
+            
         }
         else if (countdownTime <= 0 && !isLevelOver)
         {
@@ -185,20 +187,25 @@ public class GameManager : MonoBehaviour
             isLevelOver = true;
         }
 
+        if (currentLevel == Level.Victory && Input.GetKeyDown(KeyCode.Return))
+        {
+            LoadLevel(Level.Nav);
+        }
+
         /*
-         * On the Boss Scene there isn't any timer so the level is over when the boss died.
-         * I'm adding an input to mock Boss Dying to see if player can go through the door
+         * Nice little cheat code to be able to beat levels :)
          */
         if (Input.GetKeyDown(KeyCode.B)) {
             isLevelOver = true;
         }
     }
 
-    private void UpdateTimer()
+    internal void UpdateTimer()
     {
         int minutes = Mathf.FloorToInt(countdownTime / 60);
         int seconds = Mathf.FloorToInt(countdownTime % 60);
         countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        countdownTime -= Time.deltaTime;
     }
 
     public void LoadLevel(Level level)
@@ -230,6 +237,11 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(BossLevel);
                 isBoss = true;
                 break;
+            case Level.Victory:
+                SceneManager.LoadScene(VictoryLevel);
+                isBoss = false;
+                currentLevel = Level.Victory;
+                break;
         }
         
     }
@@ -252,7 +264,7 @@ public class GameManager : MonoBehaviour
             case Level.Three:
                 if (isBoss)
                 {
-                    LoadLevel(Level.Nav);
+                    LoadLevel(Level.Victory);
                 }
                 else
                 {
