@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
 
     private bool facingRight = true;
 
+    private bool jump=false;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -37,9 +41,14 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
         
-        if (inputY > 0.1)
+        if (inputY > 0.1 )
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if(IsGrounded() || jump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jump = !jump;
+            }
+            
         }
 
         if (inputY < -0.1)
@@ -55,5 +64,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 }
