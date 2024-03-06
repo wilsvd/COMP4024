@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool facingRight = true;
 
+    public int jumpCount = 0;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -36,16 +38,20 @@ public class PlayerMovement : MonoBehaviour
         {
             Flip();
         }
-        
-        if (inputY > 0.1)
+
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if (jumpCount < 2)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpCount++;
+            }
         }
 
         if (inputY < -0.1)
         {
             // Applying a custom fall multiplier when falling
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1)* deltaTime;
         }
     }
 
@@ -55,5 +61,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Ground"))
+        {
+            jumpCount = 0;
+        }
     }
 }
