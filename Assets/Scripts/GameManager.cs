@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private const string NavLevel = "NAV LEVEL";
-    private const string LevelOne = "LEVEL ONE";
-    private const string LevelTwo = "LEVEL TWO";
-    private const string LevelThree = "LEVEL THREE";
-    private const string BossLevel = "BOSS LEVEL";
-    private const string VictoryLevel = "VICTORY_SCENE";
+    internal const string NavLevel = "NAV LEVEL";
+    internal const string LevelOne = "LEVEL ONE";
+    internal const string LevelTwo = "LEVEL TWO";
+    internal const string LevelThree = "LEVEL THREE";
+    internal const string BossLevel = "BOSS LEVEL";
+    internal const string VictoryLevel = "VICTORY_SCENE";
 
-    private const float CountTime = 30f;
+    internal const float CountTime = 30f;
     public enum Level
     {
         Nav,
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public bool isLevelLoading = false;
 
     public bool isBoss = false;
-    private float countdownTime = CountTime; // 60 seconds initially
+    internal float countdownTime = CountTime; // 60 seconds initially
     public Text countdownText;
 
 
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         if (countdownText != null && countdownTime > 0 && !isBoss && currentLevel != (int)Level.Nav && !isLevelOver)
         {
             UpdateTimer();
-            countdownTime -= Time.deltaTime;
+            
         }
         else if (countdownTime <= 0 && !isLevelOver)
         {
@@ -111,11 +111,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void UpdateTimer()
+    internal void UpdateTimer()
     {
         int minutes = Mathf.FloorToInt(countdownTime / 60);
         int seconds = Mathf.FloorToInt(countdownTime % 60);
         countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        countdownTime -= Time.deltaTime;
     }
 
     public void LoadLevel(Level level)
