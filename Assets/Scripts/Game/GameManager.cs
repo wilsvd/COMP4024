@@ -215,7 +215,6 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(Level level)
     {
         isLevelLoading = true;
-        Debug.Log("levelQuestionCount: " + levelQuestionCount + " --- gameQuestionCount: " + gameQuestionCount);
         switch (level)
         {
             case Level.Nav:
@@ -223,6 +222,7 @@ public class GameManager : MonoBehaviour
                 currentLevel = level;
                 isBoss = false;
                 levelQuestionCount = 0;
+                gameQuestionCount = 0;
                 break;
             case Level.One:
                 SceneManager.LoadScene(LevelOne);
