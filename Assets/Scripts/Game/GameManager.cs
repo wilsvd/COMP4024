@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
 
     public List<QuestionData> questions;
 
+    public int gameQuestionCount = 0;
+    public int levelQuestionCount = 0;
+
     public Canvas CanvasPopup;
 
 
@@ -144,6 +147,14 @@ public class GameManager : MonoBehaviour
                 countdownText = timer.transform.GetChild(0).GetComponent<Text>();
             }
         }
+        else if (currentLevel == Level.Victory)
+        {
+            GameObject score = GameObject.FindGameObjectWithTag("ScoreText");
+            if (score)
+            {
+                score.GetComponent<Text>().text = string.Format("{0}", gameQuestionCount);
+            }
+        }
         
     }
 
@@ -185,27 +196,32 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(Level level)
     {
         isLevelLoading = true;
+        Debug.Log("levelQuestionCount: " + levelQuestionCount + " --- gameQuestionCount: " + gameQuestionCount);
         switch (level)
         {
             case Level.Nav:
                 SceneManager.LoadScene(NavLevel);
                 currentLevel = level;
                 isBoss = false;
+                levelQuestionCount = 0;
                 break;
             case Level.One:
                 SceneManager.LoadScene(LevelOne);
                 currentLevel = level;
                 isBoss = false;
+                levelQuestionCount = 0;
                 break;
             case Level.Two:
                 SceneManager.LoadScene(LevelTwo);
                 currentLevel = level;
                 isBoss = false;
+                levelQuestionCount = 0;
                 break;
             case Level.Three:
                 SceneManager.LoadScene(LevelThree);
                 currentLevel = level;
                 isBoss = false;
+                levelQuestionCount = 0;
                 break;
             case Level.Boss:
                 SceneManager.LoadScene(BossLevel);
@@ -228,16 +244,18 @@ public class GameManager : MonoBehaviour
             case Level.Two:
                 if (isBoss)
                 {
+                    gameQuestionCount += levelQuestionCount;
                     LoadLevel(currentLevel+1);
                 }
                 else
                 {
-                    LoadLevel(Level.Boss);
+                    LoadLevel(Level.Boss);                    
                 }
                 break;
             case Level.Three:
                 if (isBoss)
                 {
+                    gameQuestionCount += levelQuestionCount;
                     LoadLevel(Level.Victory);
                 }
                 else

@@ -10,6 +10,8 @@ TagManager:
   - Spawn
   - questionText
   - Ground
+  - Timer
+  - ScoreText
   layers:
   - Default
   - TransparentFX
