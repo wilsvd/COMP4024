@@ -20,6 +20,8 @@ Contributors names and contact info
 * Gursaiv
 * Alex
 * Sam
+* Aswathi
+* Wil
 
 ## Acknowledgments
 

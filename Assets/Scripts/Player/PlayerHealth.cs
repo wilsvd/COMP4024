@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class healthPoints : MonoBehaviour
+// The PlayerHealth class manages the health of the player character.
+public class PlayerHealth : MonoBehaviour
 {
     public int MaxHealth = 125;
     public int currentHealth;
 
-    public sliderscript Healthbar;
+    // Reference to the PlayerHealthbar script for updating the health UI.
+    public PlayerHealthbar Healthbar;
 
     // Start is called before the first frame update
     void Start()
@@ -15,12 +17,14 @@ public class healthPoints : MonoBehaviour
         InitialiseHealth();
     }
 
+    // Initialize the player's health to the maximum and update the health UI.
     public void InitialiseHealth()
     {
         currentHealth = MaxHealth;
         Healthbar.SetMaxHealth(MaxHealth);
     }
 
+    // Inflict damage to the player, update the health UI, and check for death.
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -28,20 +32,13 @@ public class healthPoints : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            /*TODO:
-             * Kill Player
-             * Restart Game
-             */
             Die();
-
         }
     }
 
+    // Handle the player's death by resetting the level.
     public void Die()
     {
-        /*
-         * TODO: Create some nice death affect
-         */
         GameManager.Instance.ResetLevel();
     }
 

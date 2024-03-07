@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HPbossTesting
+public class BossHealthTests
 {
     private GameObject gameObject;
 
@@ -27,7 +27,7 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator SetMaxHealth_SetsMaxHealthCorrectly()
     {
-        Slider_bossHP sliderScript = gameObject.AddComponent<Slider_bossHP>();
+        BossHealthbar sliderScript = gameObject.AddComponent<BossHealthbar>();
         sliderScript.slider = gameObject.AddComponent<Slider>();
 
         sliderScript.SetMaxHealth(500);
@@ -42,8 +42,8 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator TakeDamage_ReducesCurrentHealth()
     {
-        Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
-        Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
+        BossHealth bossScript = gameObject.AddComponent<BossHealth>();
+        BossHealthbar healthBarScript = gameObject.AddComponent<BossHealthbar>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
 
 
@@ -62,8 +62,8 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator InitialiseHealth_Start()
     {
-        Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
-        Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
+        BossHealth bossScript = gameObject.AddComponent<BossHealth>();
+        BossHealthbar healthBarScript = gameObject.AddComponent<BossHealthbar>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
         bossScript.Healthbar = healthBarScript;
 
@@ -75,5 +75,23 @@ public class HPbossTesting
 
         yield return null;
     }
+    [UnityTest]
+    public IEnumerator BossDie()
+    {
+        BossHealth bossScript = gameObject.AddComponent<BossHealth>();
+        BossHealthbar healthBarScript = gameObject.AddComponent<BossHealthbar>();
+        healthBarScript.slider = gameObject.AddComponent<Slider>();
+        bossScript.Healthbar = healthBarScript;
 
+        bossScript.MaxHealth = 500;
+        bossScript.currentHealth = 0;
+
+        // Trigger the boss die action
+        bossScript.Die();
+
+        // Assert that the boss's health is set to zero
+        Assert.AreEqual(0, bossScript.currentHealth, "Current health not set to zero when boss dies");
+
+        yield return null;
+    }
 }

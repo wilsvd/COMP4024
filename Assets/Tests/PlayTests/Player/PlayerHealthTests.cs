@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HPtesting
+public class PlayerHealthTests
 {
     private GameObject gameObject;
 
@@ -27,7 +27,7 @@ public class HPtesting
     public IEnumerator SetMaxHealth_SetsMaxHealthCorrectly()
     {
 
-        sliderscript sliderScript = gameObject.AddComponent<sliderscript>();
+        PlayerHealthbar sliderScript = gameObject.AddComponent<PlayerHealthbar>();
         sliderScript.slider = gameObject.AddComponent<Slider>();
 
         sliderScript.SetMaxHealth(125);
@@ -42,8 +42,8 @@ public class HPtesting
     public IEnumerator TakeDamage_ReducesCurrentHealth()
     {
 
-        healthPoints playerScript = gameObject.AddComponent<healthPoints>();
-        sliderscript healthBarScript = gameObject.AddComponent<sliderscript>();
+        PlayerHealth playerScript = gameObject.AddComponent<PlayerHealth>();
+        PlayerHealthbar healthBarScript = gameObject.AddComponent<PlayerHealthbar>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
         playerScript.Healthbar = healthBarScript;
 
@@ -61,8 +61,8 @@ public class HPtesting
     [UnityTest]
     public IEnumerator InitialiseHealth_Start()
     {
-        healthPoints playerScript = gameObject.AddComponent<healthPoints>();
-        sliderscript healthBarScript = gameObject.AddComponent<sliderscript>();
+        PlayerHealth playerScript = gameObject.AddComponent<PlayerHealth>();
+        PlayerHealthbar healthBarScript = gameObject.AddComponent<PlayerHealthbar>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
         playerScript.Healthbar = healthBarScript;
 
