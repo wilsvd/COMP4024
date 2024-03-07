@@ -4,6 +4,9 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
+
+// The QuestionManager class is responsible for managing the education part of the game
+
 public class QuestionManager : MonoBehaviour
 {
     [SerializeField]
@@ -26,6 +29,8 @@ public class QuestionManager : MonoBehaviour
     public Button answerButton3;
     public Button answerButton4;
     public PlayerMovement playerMovement;
+
+    // Display the provided answer on the specified button and set up click event handling.
     internal void DisplayAnswerOnButton(Button button, string answer)
     {
         button.GetComponentInChildren<Text>().text = answer;
@@ -34,6 +39,7 @@ public class QuestionManager : MonoBehaviour
         button.onClick.AddListener(() => HandleButtonClick(answer));
     }
 
+    // Handle button click events, check if the selected answer is correct
     internal void HandleButtonClick(string selectedAnswer)
     {
         // Get the current question
@@ -54,8 +60,8 @@ public class QuestionManager : MonoBehaviour
         {
             Debug.Log("Incorrect answer chosen!");
         }
-        // Set the sprite to a blank square with the same size as the original box
 
+        // Set the sprite to a blank square with the same size as the original box
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Vector2 originalSize = spriteRenderer.size;
         spriteRenderer.sprite = blankSprite;
@@ -112,7 +118,6 @@ public class QuestionManager : MonoBehaviour
                     playerMovement.canMove = false;
                     DisplayQuestion();
                     popupCanvas.enabled = true;
-                    // NEED TO SET THE TEXT IN HERE FOR questionText
 
                 }
 
@@ -121,6 +126,8 @@ public class QuestionManager : MonoBehaviour
             }
         }
     }
+
+    // Display a random question along with multiple-choice answers on buttons.
     internal void DisplayQuestion()
     {
         // Check if there are any questions available
@@ -155,6 +162,7 @@ public class QuestionManager : MonoBehaviour
         }
     }
 
+    // Spawn a random item (sword or bow) based on chance.
     internal void SpawnRandomItem()
     {
         // Generate a random value between 0 and 1
@@ -163,14 +171,13 @@ public class QuestionManager : MonoBehaviour
         {
             return;
         }
-        if (randomValue <= 0.5f) // 20% chance for a bow
+        if (randomValue <= 0.5f) // 50% chance for a bow
         {
             Instantiate(bowPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity);
         }
-        else if (randomValue <= 1f) // 20% chance for a sword
+        else if (randomValue <= 1f) // 50% chance for a sword
         {
             Instantiate(swordPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity);
         }
-        // No need for an 'else' here since we don't want to do anything for the 60% chance to print "hello"
     }
 }
