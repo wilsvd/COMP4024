@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Slider_bossHP : MonoBehaviour
+public class BossHealthbar : MonoBehaviour
 {
     public Slider slider;
 

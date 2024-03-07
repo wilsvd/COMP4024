@@ -18,7 +18,7 @@ public class Sword : MonoBehaviour
         if (collision.CompareTag("Boss") && canAttack)
         {
             Debug.Log("Player takes damage");
-            collision.GetComponent<Boss_Healthbar>().TakeDamage(attackDamage);
+            collision.GetComponent<BossHealth>().TakeDamage(attackDamage);
             canAttack = false;
         }
     }

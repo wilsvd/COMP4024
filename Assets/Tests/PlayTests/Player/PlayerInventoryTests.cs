@@ -8,19 +8,20 @@ using UnityEditor;
 
 
 
-public class InventoryTests
+public class PlayerInventoryTests
 {
+    PlayerInventory inventory;
     [SetUp]
     public void SetUp()
     {
-        SceneManager.LoadScene("NAV LEVEL");
+        SceneManager.LoadScene(GameManager.NavLevel);
+        inventory = GameObject.Find("Inventory").GetComponent<PlayerInventory>();
     }
 
 
     [UnityTest]
     public IEnumerator InitializeInventory_SlotsHaveFists()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         inventory.InitializeInventory();
 
         Assert.AreEqual("Fists", inventory.slots[0].item.name);
@@ -32,7 +33,6 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator ResetInventory_SlotsHaveFists()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         // Mock having a Sword item
         GameObject sword = new GameObject();
         sword.name = "Sword";
@@ -61,16 +61,15 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator CheckItemType_SwordItemReturnsSwordEnum()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         GameObject sword = new GameObject();
         sword.name = "Sword";
         GameObject swordVFX = new GameObject();
         swordVFX.AddComponent<Sword>();
         swordVFX.transform.SetParent(sword.transform);
 
-        Inventory.Weapon itemType = inventory.CheckItemType(sword);
+        PlayerInventory.Weapon itemType = inventory.CheckItemType(sword);
 
-        Assert.AreEqual(Inventory.Weapon.Sword, itemType);
+        Assert.AreEqual(PlayerInventory.Weapon.Sword, itemType);
 
         yield return null;
     }
@@ -78,16 +77,15 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator CheckItemType_BowItemReturnsBowEnum()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         GameObject bow = new GameObject();
         bow.name = "Bow";
         bow.AddComponent<Bow>();
         GameObject bowVFX = new GameObject();
         bowVFX.transform.SetParent(bow.transform);
 
-        Inventory.Weapon itemType = inventory.CheckItemType(bow);
+        PlayerInventory.Weapon itemType = inventory.CheckItemType(bow);
 
-        Assert.AreEqual(Inventory.Weapon.Bow, itemType);
+        Assert.AreEqual(PlayerInventory.Weapon.Bow, itemType);
 
         yield return null;
     }
@@ -95,7 +93,6 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator ImproveWeapon_ImprovesSwordDamage()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         GameObject sword = new GameObject();
         sword.name = "Sword";
         GameObject swordVFX = new GameObject();
@@ -106,7 +103,7 @@ public class InventoryTests
         swordScript.attackDamage = 30;
         inventory.AddItem(sword);
         // Improve the sword
-        inventory.ImproveWeapon(Inventory.Weapon.Sword, 0);
+        inventory.ImproveWeapon(PlayerInventory.Weapon.Sword, 0);
         int currentDamage = inventory.slots[0].item.transform.GetChild(0).GetComponent<Sword>().attackDamage;
         Assert.AreEqual(50, currentDamage);
 
@@ -117,7 +114,6 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator HasWeapon_ReturnsCorrectIndex()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         GameObject sword = new GameObject();
         sword.name = "Sword";
         GameObject swordVFX = new GameObject();
@@ -125,7 +121,7 @@ public class InventoryTests
         swordVFX.transform.SetParent(sword.transform);
         inventory.AddItem(sword);
 
-        int index = inventory.HasWeapon(Inventory.Weapon.Sword);
+        int index = inventory.HasWeapon(PlayerInventory.Weapon.Sword);
 
         Assert.AreEqual(0, index);
 
@@ -136,7 +132,6 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator UpdateEquippedItem_UpdatesEquippedItem()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         GameObject sword = new GameObject();
         sword.name = "Sword";
         GameObject swordVFX = new GameObject();
@@ -144,10 +139,10 @@ public class InventoryTests
         swordVFX.transform.SetParent(sword.transform);
         inventory.AddItem(sword);
 
-        inventory.UpdateEquippedItem(sword, Inventory.Weapon.Sword);
+        inventory.UpdateEquippedItem(sword, PlayerInventory.Weapon.Sword);
 
         Assert.AreEqual(sword, inventory.equippedItem.item);
-        Assert.AreEqual(Inventory.Weapon.Sword, inventory.equippedItem.type);
+        Assert.AreEqual(PlayerInventory.Weapon.Sword, inventory.equippedItem.type);
 
         yield return null;
         inventory.ResetInventory();
@@ -156,8 +151,6 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator SwitchItems_SwitchesActiveItemToBow()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-
         // Mock having a Sword item
         GameObject sword = new GameObject();
         sword.name = "Sword";
@@ -192,8 +185,6 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator SwitchItems_SwitchesActiveItemToSword()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-
         // Mock having a Sword item
         GameObject sword = new GameObject();
         sword.name = "Sword";
@@ -228,7 +219,6 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator AddItem_OneItemInEmptySlot()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         GameObject gameObject1 = new GameObject();
         gameObject1.name = "Item";
 
@@ -244,8 +234,6 @@ public class InventoryTests
     [UnityTest]
     public IEnumerator AddItem_TwoItemsInEmptySlots()
     {
-        Inventory inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-
         // Mock having a Sword item
         GameObject sword = new GameObject();
         sword.name = "Sword";

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_Healthbar : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    public int MaxHealth = 500;
+    public int MaxHealth = 125;
     public int currentHealth;
 
-    public Slider_bossHP Healthbar;
+    public PlayerHealthbar Healthbar;
 
     // Start is called before the first frame update
     void Start()
@@ -19,27 +19,23 @@ public class Boss_Healthbar : MonoBehaviour
     {
         currentHealth = MaxHealth;
         Healthbar.SetMaxHealth(MaxHealth);
-
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         Healthbar.SetHealth(currentHealth);
+
         if (currentHealth <= 0)
         {
             Die();
-        }
 
+        }
     }
 
     public void Die()
     {
-        /* 
-         * TODO: Create some nice death affect
-         */
-        GameManager.Instance.isLevelOver = true;
-        Destroy(gameObject);
+        GameManager.Instance.ResetLevel();
     }
 
 }
