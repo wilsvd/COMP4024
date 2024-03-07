@@ -26,4 +26,7 @@ Contributors names and contact info
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
-* 
+* [Sword Design](https://www.flaticon.com/free-icon/sword_7202246?term=sword&related_id=7202246)
+* [Bow Design](https://www.flaticon.com/style/search?word=bow)
+* [Arrow Design](https://www.flaticon.com/free-icon/arrow_95555?term=arrow+weapon&page=1&position=1&origin=search&related_id=95555)
+* [Figma File](https://www.figma.com/file/X96FS13WaN1wfU0Jjwls7A/Soft-Eng-Management?type=design&node-id=427-14854&mode=design)
