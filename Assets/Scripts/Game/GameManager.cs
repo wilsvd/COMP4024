@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// The GameManager class manages the game state, including level loading, timers, and question data.
 public class GameManager : MonoBehaviour
 {
+    // Constants defining scene names.
     internal const string NavLevel = "NAV LEVEL";
     internal const string LevelOne = "LEVEL ONE";
     internal const string LevelTwo = "LEVEL TWO";
@@ -13,7 +15,10 @@ public class GameManager : MonoBehaviour
     internal const string BossLevel = "BOSS LEVEL";
     internal const string VictoryLevel = "VICTORY_SCENE";
 
+    // Constant defining the initial countdown time.
     internal const float CountTime = 30f;
+
+    // Enumeration representing different game levels.
     public enum Level
     {
         Nav,
@@ -24,22 +29,28 @@ public class GameManager : MonoBehaviour
         Victory
     }
     public Level currentLevel = Level.Nav;
-
     private static GameManager instance;
+
+    // Flags indicating the state of the game.
     public bool isLevelOver = false;
     public bool isLevelLoading = false;
-
     public bool isBoss = false;
+
+    // Countdown timer variables.
     internal float countdownTime = CountTime; // 60 seconds initially
     public Text countdownText;
 
-    private const string QuestionsCSVPath = "Assets/Resources/questions.csv"; // Modify the path accordingly
+    // Path to the CSV file containing question data.
+    private const string QuestionsCSVPath = "Assets/Resources/questions.csv";
 
+    // List to store question data.
     public List<QuestionData> questions;
 
+    // Variables to track the number of questions in the game and the current level.
     public int gameQuestionCount = 0;
     public int levelQuestionCount = 0;
 
+    // Reference to the CanvasPopup.
     public Canvas CanvasPopup;
 
 
@@ -55,6 +66,7 @@ public class GameManager : MonoBehaviour
         public string correctAnswer;
     }
 
+    // Singleton pattern to get the GameManager instance.
     public static GameManager Instance
     {
         get
@@ -85,11 +97,15 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
+            // Load questions from the CSV file.
             LoadQuestionsFromCSV();
-            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
+            // Subscribe to the sceneLoaded event.
+            SceneManager.sceneLoaded += OnSceneLoaded;
 
         }
     }
+
+    // Load questions from the CSV file and populate the questions list.
     private void LoadQuestionsFromCSV()
     {
         questions = new List<QuestionData>();
@@ -122,15 +138,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    // Unsubscribe from the sceneLoaded event when the GameManager is destroyed.
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded; // Unsubscribe from the sceneLoaded event when the GameManager is destroyed
     }
 
+    // Handle actions when a scene is loaded.
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         PlayerManager player = FindObjectOfType<PlayerManager>();
+        // Reset player, timers, and other variables when a new scene is loaded.
         if (player != null) player.ResetPlayer(isBoss);
 
         countdownTime = CountTime;
@@ -177,14 +195,14 @@ public class GameManager : MonoBehaviour
             LoadLevel(Level.Nav);
         }
 
-        /*
-         * Nice little cheat code to be able to beat levels :)
-         */
+        
+         // Nice little cheat code to be able to open the doors on each level :)
         if (Input.GetKeyDown(KeyCode.B)) {
             isLevelOver = true;
         }
     }
 
+    // Update the countdown timer text.
     internal void UpdateTimer()
     {
         int minutes = Mathf.FloorToInt(countdownTime / 60);
@@ -193,6 +211,7 @@ public class GameManager : MonoBehaviour
         countdownTime -= Time.deltaTime;
     }
 
+    // Load a specific level based on the provided level enum.
     public void LoadLevel(Level level)
     {
         isLevelLoading = true;
@@ -236,6 +255,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // Load the next level based on the current level.
     public void LoadNextLevel()
     {
         switch (currentLevel)
@@ -266,6 +286,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Reset the current level.
     public void ResetLevel()
     {
         LoadLevel(currentLevel);

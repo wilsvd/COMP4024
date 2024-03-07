@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// The TagAssigner class makes sure that every platform contains the ground tag
 public class TagAssigner : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -9,7 +10,7 @@ public class TagAssigner : MonoBehaviour
         TagAllChildren(transform, "Ground");
     }
 
-    // Method to tag all child objects
+    // Tag all child objects of platform as ground
     internal void TagAllChildren(Transform parent, string tag)
     {
         foreach (Transform child in parent)
