@@ -21,6 +21,7 @@ Contributors names and contact info
 * Alex
 * Sam
 * Aswathi
+* Wil
 
 ## Acknowledgments
 
