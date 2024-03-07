@@ -32,9 +32,6 @@ public class QuestionManager : MonoBehaviour
 
         button.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplication
         button.onClick.AddListener(() => HandleButtonClick(answer));
-        Debug.Log(button.name);
-
-        Debug.Log(button.isActiveAndEnabled);
     }
 
     internal void HandleButtonClick(string selectedAnswer)
@@ -47,6 +44,7 @@ public class QuestionManager : MonoBehaviour
         {
             Debug.Log("Correct answer chosen!");
 
+            GameManager.Instance.levelQuestionCount++;
             // Determine the item to spawn based on random chance
             SpawnRandomItem();
             // Continue with the game or perform other actions
@@ -109,8 +107,6 @@ public class QuestionManager : MonoBehaviour
 
             if (bottomCollisionDetected)
             {
-                Debug.Log("Player collided with Obstacle's bottom!");
-
                 if (!isEmpty)
                 {
                     playerMovement.canMove = false;
