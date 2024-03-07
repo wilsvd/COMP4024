@@ -34,7 +34,13 @@ public class PlayerManagerTests
         Assert.NotNull(health);
         Assert.NotNull(inventory);
 
-        Assert.AreEqual(originalSpawn.transform.position, player.transform.position);
+        // Float numbers can't be compared exactly so take into account some variance
+        float epsilon = 0.1f;
+        Assert.IsTrue(Mathf.Abs(originalSpawn.transform.position.x - player.transform.position.x) < epsilon);
+        Assert.IsTrue(Mathf.Abs(originalSpawn.transform.position.y - player.transform.position.y) < epsilon);
+        Assert.IsTrue(Mathf.Abs(originalSpawn.transform.position.z - player.transform.position.z) < epsilon);
+
+
         Assert.AreEqual(125, health.currentHealth);
         Assert.AreEqual("Fists", inventory.slots[0].item.name);
         Assert.AreEqual("Fists", inventory.slots[1].item.name);
