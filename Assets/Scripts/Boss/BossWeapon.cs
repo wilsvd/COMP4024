@@ -15,7 +15,7 @@ public class BossWeapon : MonoBehaviour
     {
         if (collision.CompareTag("Player") && canAttack)
         {
-            collision.GetComponent<healthPoints>().TakeDamage(attackDamage);
+            collision.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
             canAttack = false;
         }
     }

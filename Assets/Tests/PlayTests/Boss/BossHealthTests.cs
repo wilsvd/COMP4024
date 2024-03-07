@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HPbossTesting
+public class BossHealthTests
 {
     private GameObject gameObject;
 
@@ -27,7 +27,7 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator SetMaxHealth_SetsMaxHealthCorrectly()
     {
-        Slider_bossHP sliderScript = gameObject.AddComponent<Slider_bossHP>();
+        BossHealthbar sliderScript = gameObject.AddComponent<BossHealthbar>();
         sliderScript.slider = gameObject.AddComponent<Slider>();
 
         sliderScript.SetMaxHealth(500);
@@ -42,8 +42,8 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator TakeDamage_ReducesCurrentHealth()
     {
-        Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
-        Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
+        BossHealth bossScript = gameObject.AddComponent<BossHealth>();
+        BossHealthbar healthBarScript = gameObject.AddComponent<BossHealthbar>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
 
 
@@ -62,8 +62,8 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator InitialiseHealth_Start()
     {
-        Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
-        Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
+        BossHealth bossScript = gameObject.AddComponent<BossHealth>();
+        BossHealthbar healthBarScript = gameObject.AddComponent<BossHealthbar>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
         bossScript.Healthbar = healthBarScript;
 
@@ -78,8 +78,8 @@ public class HPbossTesting
     [UnityTest]
     public IEnumerator BossDie()
     {
-        Boss_Healthbar bossScript = gameObject.AddComponent<Boss_Healthbar>();
-        Slider_bossHP healthBarScript = gameObject.AddComponent<Slider_bossHP>();
+        BossHealth bossScript = gameObject.AddComponent<BossHealth>();
+        BossHealthbar healthBarScript = gameObject.AddComponent<BossHealthbar>();
         healthBarScript.slider = gameObject.AddComponent<Slider>();
         bossScript.Healthbar = healthBarScript;
 

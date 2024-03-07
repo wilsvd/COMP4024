@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static GameManager;
 using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
-public class ObstacleScript : MonoBehaviour
+public class QuestionManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject swordPrefab; // Serialize the field for inspection in the Unity Editor
@@ -16,23 +15,21 @@ public class ObstacleScript : MonoBehaviour
 
     private bool hasCollided = false;
     private SpriteRenderer spriteRenderer;
-    private Collider2D obstacleCollider;
     private bool isEmpty = false;
     public Canvas popupCanvas;
-    private GameManager gameManager;
     public Text questionText;
+    private Collider2D obstacleCollider;
 
-    public List<QuestionData> questions;
+
+    public List<GameManager.QuestionData> questions;
     int randomQuestionIndex;
     public Button answerButton1;
     public Button answerButton2;
     public Button answerButton3;
     public Button answerButton4;
     public PlayerMovement playerMovement;
-    void DisplayAnswerOnButton(Button button, string answer)
+    internal void DisplayAnswerOnButton(Button button, string answer)
     {
-        // Set the text on the button
-        Debug.Log("SETUP BUTTON LISTENER");
         button.GetComponentInChildren<Text>().text = answer;
 
         button.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplication
@@ -42,11 +39,10 @@ public class ObstacleScript : MonoBehaviour
         Debug.Log(button.isActiveAndEnabled);
     }
 
-    void HandleButtonClick(string selectedAnswer)
+    internal void HandleButtonClick(string selectedAnswer)
     {
         // Get the current question
-        Debug.Log("Clicked");
-        QuestionData currentQuestion = questions[randomQuestionIndex]; // Assuming questions are always displayed randomly
+        GameManager.QuestionData currentQuestion = questions[randomQuestionIndex]; // Assuming questions are always displayed randomly
 
         // Check if the selected answer is correct
         if (selectedAnswer == currentQuestion.correctAnswer)
@@ -104,8 +100,7 @@ public class ObstacleScript : MonoBehaviour
             Debug.LogError("GameObject with the name not found.");
         }
         
-        gameManager = FindObjectOfType<GameManager>();
-        questions = gameManager.questions;
+        questions = GameManager.Instance.questions;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -136,7 +131,7 @@ public class ObstacleScript : MonoBehaviour
             }
         }
     }
-    void DisplayQuestion()
+    internal void DisplayQuestion()
     {
         // Check if there are any questions available
         if (questions == null || questions.Count == 0)
@@ -149,7 +144,7 @@ public class ObstacleScript : MonoBehaviour
         randomQuestionIndex = Random.Range(0, questions.Count);
 
         // Get the randomly selected question
-        QuestionData currentQuestion = questions[randomQuestionIndex];
+        GameManager.QuestionData currentQuestion = questions[randomQuestionIndex];
 
         // Display question text
         questionText.text = currentQuestion.question;
@@ -170,7 +165,7 @@ public class ObstacleScript : MonoBehaviour
         }
     }
 
-    private void SpawnRandomItem()
+    internal void SpawnRandomItem()
     {
         // Generate a random value between 0 and 1
         float randomValue = Random.value;

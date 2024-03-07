@@ -11,12 +11,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private int rangeSpeed;
     [SerializeField] private int damage;
 
-    internal Inventory inventory;
+    internal PlayerInventory inventory;
 
     float timeUntilAttack = 0;
     private void Start()
     {
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        inventory = GameObject.Find("Inventory").GetComponent<PlayerInventory>();
     }
 
     // Update is called once per frame
@@ -26,12 +26,12 @@ public class PlayerAttack : MonoBehaviour
         if (timeUntilAttack <= 0f && Input.GetKeyDown(KeyCode.Space))
         {
 
-            if (inventory.equippedItem.type == Inventory.Weapon.Sword)
+            if (inventory.equippedItem.type == PlayerInventory.Weapon.Sword)
             {
                 SwordAttack();
 
             }
-            else if (inventory.equippedItem.type == Inventory.Weapon.Bow)
+            else if (inventory.equippedItem.type == PlayerInventory.Weapon.Bow)
             {
                 BowAttack();
             }

@@ -50,10 +50,10 @@ public class PlayerManager : MonoBehaviour
     public void ResetPlayer(bool isBoss)
     {
         RepawnPlayer();
-        GetComponent<healthPoints>().InitialiseHealth();
+        GetComponent<PlayerHealth>().InitialiseHealth();
         if (!isBoss)
         {
-            transform.GetChild(0).GetComponent<Inventory>().ResetInventory();
+            transform.GetChild(0).GetComponent<PlayerInventory>().ResetInventory();
         }
             
     }

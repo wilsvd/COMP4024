@@ -10,7 +10,7 @@ public class TagAssigner : MonoBehaviour
     }
 
     // Method to tag all child objects
-    void TagAllChildren(Transform parent, string tag)
+    internal void TagAllChildren(Transform parent, string tag)
     {
         foreach (Transform child in parent)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class sliderscript : MonoBehaviour
+public class PlayerHealthbar : MonoBehaviour
 {
     public Slider slider;
 

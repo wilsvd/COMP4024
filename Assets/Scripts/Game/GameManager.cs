@@ -83,33 +83,8 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             LoadQuestionsFromCSV();
-            //printQuestions();
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
 
-        }
-    }
-
-
-    public void printQuestions()
-    {
-        if (questions != null && questions.Count > 0)
-        {
-            foreach (var question in questions)
-            {
-                Debug.Log($"Question: {question.question} \n" +
-                    $"Difficulty: {question.difficulty}" +
-                    $"Answers:" +
-                    $"1: {question.answer1}" +
-                    $"2: {question.answer2}" +
-                    $"3: {question.answer3}" +
-                    $"4: {question.answer4}" +
-                    $"Correct Answer: {question.correctAnswer}" +
-                    $"------------------------");
-            }
-        }
-        else
-        {
-            Debug.LogError("Failed to load questions.");
         }
     }
     private void LoadQuestionsFromCSV()
@@ -159,18 +134,17 @@ public class GameManager : MonoBehaviour
         isLevelOver = false;
         isLevelLoading = false;
 
+
         // Find the countdownText in the loaded scene
-
-        GameObject timer;
-
-        if(timer = GameObject.FindGameObjectWithTag("Timer"))
+        if (currentLevel == Level.One || currentLevel == Level.Two || currentLevel == Level.Three)
         {
-            countdownText = timer.transform.GetChild(0).GetComponent<Text>();
-
+            GameObject timer = GameObject.FindGameObjectWithTag("Timer");
+            if (timer)
+            {
+                countdownText = timer.transform.GetChild(0).GetComponent<Text>();
+            }
         }
-
-        Debug.Log(countdownText);
-
+        
     }
 
     private void Update()

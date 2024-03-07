@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerPickup : MonoBehaviour
 {
-    internal Inventory inventory;
+    internal PlayerInventory inventory;
     private void Start()
     {
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        inventory = GameObject.Find("Inventory").GetComponent<PlayerInventory>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

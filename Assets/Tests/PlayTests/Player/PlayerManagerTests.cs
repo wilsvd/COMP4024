@@ -28,8 +28,8 @@ public class PlayerManagerTests
         yield return null;
 
 
-        healthPoints health = player.GetComponent<healthPoints>();
-        Inventory inventory = player.transform.GetChild(0).GetComponent<Inventory>();
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        PlayerInventory inventory = player.transform.GetChild(0).GetComponent<PlayerInventory>();
         // Assert
         Assert.NotNull(health);
         Assert.NotNull(inventory);
