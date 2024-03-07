@@ -31,8 +31,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if(canMove == false)
         {
-            inputX = 0;
-            inputY = 0;
+            rb.velocity = new Vector2(0, 0);
+            return;
         }
         rb.velocity = new Vector2(inputX * moveSpeed, rb.velocity.y);
         if (inputX > 0.5 && !facingRight)

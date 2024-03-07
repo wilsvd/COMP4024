@@ -14,11 +14,9 @@ public class QuestionManager : MonoBehaviour
     private Sprite blankSprite;      // Serialize the field for a blank sprite
 
     private bool hasCollided = false;
-    private SpriteRenderer spriteRenderer;
     private bool isEmpty = false;
     public Canvas popupCanvas;
     public Text questionText;
-    private Collider2D obstacleCollider;
 
 
     public List<GameManager.QuestionData> questions;
@@ -59,23 +57,19 @@ public class QuestionManager : MonoBehaviour
             Debug.Log("Incorrect answer chosen!");
         }
         // Set the sprite to a blank square with the same size as the original box
+
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        Vector2 originalSize = spriteRenderer.size;
         spriteRenderer.sprite = blankSprite;
-        spriteRenderer.size = GetComponent<SpriteRenderer>().size;
+        spriteRenderer.size = originalSize;
         popupCanvas.enabled = false;
         playerMovement.canMove = true;
         isEmpty = true;
-
     }
 
 
     private void Start()
     {
-        // Get the SpriteRenderer component attached to the GameObject
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        // Get the Collider2D component attached to the GameObject
-        obstacleCollider = GetComponent<Collider2D>();
-
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         // Find the canvas GameObject by name
         GameObject canvasObject = GameObject.Find("CanvasPopup");
